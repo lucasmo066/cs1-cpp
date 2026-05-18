@@ -17,7 +17,9 @@ using namespace std;
 // 1. Write a function called square() that takes an int,
 //    and returns that number multiplied by itself.
 //    Call it in main() with a few different numbers and print the results.
-
+int square (int number) {
+    return number * number;
+}
 // 2. Write a function called celsiusToFahrenheit() that takes a double
 //    representing a celsius temperature and returns the fahrenheit equivalent.
 //    Formula: (celsius * 9.0 / 5.0) + 32.0
@@ -106,8 +108,10 @@ int main() {
     srand(time(0));
 
     // call and test each function here as you complete them
-    
-
+    cout << square(5) << endl;
+    cout << square(20) << endl;
+    cout << square(8) << endl;
+    cout << square(12) << endl;
 
     return 0;
 }
