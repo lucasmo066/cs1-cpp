@@ -34,9 +34,6 @@ double celsiusToFahrenheit (double celsius) {
 //    Example output: "Full name: Lucas Moraes"
 //    Call it in main() with your own name.
 void printFullName (string firstName, string lastName) {
-    
-    
-
     cout << "Full name: " + firstName << " " << lastName << endl;
 }
 
@@ -44,7 +41,13 @@ void printFullName (string firstName, string lastName) {
 //    and returns a bool — true if the number is even, false if odd.
 //    Hint: use the modulus operator %.
 //    Call it in main() and print "even" or "odd" based on the result.
-
+bool isEven (int inputNum) {
+    if (inputNum % 2 == 0) {
+         return true;
+    } else {
+        return false;
+    }
+}
 // ------------------------------------------------------------
 // LEVEL 2 — Functions with conditionals
 // ------------------------------------------------------------
@@ -125,8 +128,14 @@ int main() {
     //cout << celsiusToFahrenheit(0) << endl;
     
     //1.3
-    printFullName("Lucas", "Moraes");
+    //printFullName("Lucas", "Moraes");
 
+    //1.4
+    if (isEven(7)) {
+        cout << "7 is even" << endl;
+    } else {
+        cout << "7 is odd" << endl;
+    }
 
     return 0;
 }
