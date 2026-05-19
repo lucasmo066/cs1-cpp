@@ -24,11 +24,21 @@ int square (int number) {
 //    representing a celsius temperature and returns the fahrenheit equivalent.
 //    Formula: (celsius * 9.0 / 5.0) + 32.0
 //    Call it in main() with 0, 100, and 37 and print each result.
+double celsiusToFahrenheit (double celsius) {
+    double fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
+    return fahrenheit;
+}
 
 // 3. Write a void function called printFullName() that takes two strings,
 //    a first name and a last name, and prints them on one line.
 //    Example output: "Full name: Lucas Moraes"
 //    Call it in main() with your own name.
+void printFullName (string firstName, string lastName) {
+    
+    
+
+    cout << "Full name: " + firstName << " " << lastName << endl;
+}
 
 // 4. Write a function called isEven() that takes an int
 //    and returns a bool — true if the number is even, false if odd.
@@ -106,12 +116,17 @@ int square (int number) {
 
 int main() {
     srand(time(0));
-
     // call and test each function here as you complete them
-    cout << square(5) << endl;
-    cout << square(20) << endl;
-    cout << square(8) << endl;
-    cout << square(12) << endl;
+
+    //1.1
+    // cout << square(5) << endl;
+
+    //1.2 
+    //cout << celsiusToFahrenheit(0) << endl;
+    
+    //1.3
+    printFullName("Lucas", "Moraes");
+
 
     return 0;
 }
