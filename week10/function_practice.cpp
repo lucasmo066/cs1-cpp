@@ -96,6 +96,20 @@ int maxOfThree (int x, int y, int z) {
 //      5 to 20 lbs → $14.99
 //      over 20 lbs → $29.99
 //    Call it in main() with a few different weights.
+double calcShipping (double weight) {
+    double shippingCost = 4.99;
+
+    if (weight >=1) {
+        shippingCost = 8.99;
+    } else if (weight >=5 && weight <= 20) {
+        shippingCost = 14.99;
+
+    } else {
+        shippingCost = 29.99;
+    }
+
+    return shippingCost;
+}
 
 // ------------------------------------------------------------
 // LEVEL 3 — Functions with loops
@@ -168,8 +182,11 @@ int main() {
   //  cout << getLetterGrade(89) << endl;
 
     //2.2
-    cout << maxOfThree(4,56,32) << endl;
-    cout << "also your mom is an absolute whore" << endl; 
+    //  cout << maxOfThree(4,56,32) << endl;
+     //  cout << "also your mom is an absolute whore" << endl; 
+
+     //2.3
+    cout << "Shipping Cost: " << "$" << calcShipping(45) << endl;
 
     return 0;
 }
