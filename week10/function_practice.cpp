@@ -70,11 +70,23 @@ bool isEven (int inputNum) {
     }
 }
 
-
 // 6. Write a function called maxOfThree() that takes three ints
 //    and returns the largest of the three.
 //    Do not use any built in max() function — use if/else logic.
 //    Call it in main() and verify it works.
+int maxOfThree (int x, int y, int z) {
+    int largest = x;    
+
+    if (y > largest) {
+        largest = y;
+    }
+    if (z > largest) {
+        largest = z;
+    }
+
+    return largest;
+}
+
 
 // 7. Write a function called calcShipping() that takes a double weight
 //    and returns the shipping cost as a double.
@@ -155,7 +167,9 @@ int main() {
     //2.1
   //  cout << getLetterGrade(89) << endl;
 
-    
+    //2.2
+    cout << maxOfThree(4,56,32) << endl;
+    cout << "also your mom is an absolute whore" << endl; 
 
     return 0;
 }
