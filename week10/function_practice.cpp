@@ -56,23 +56,18 @@ bool isEven (int inputNum) {
 //    and returns a char representing the letter grade.
 //    90-100 = A, 80-89 = B, 70-79 = C, 60-69 = D, below 60 = F
 //    Call it in main() with at least 4 different scores and print each grade.
- char getLetterGrade (int score) {
-    
-
-    if () {
-
-    } else if () {
-
-
-    } else if () {
-
-
+ char getLetterGrade (int grade) {
+    if (grade >= 90 ) {
+        return 'A';
+    } else if ( grade >= 80) {
+        return 'B';
+    } else if (grade >= 70) {
+        return 'C';
+    } else if (grade >= 60) {
+        return 'D';
     } else {
-
-
+        return 'F';
     }
-
-    return 0;
 }
 
 
@@ -142,23 +137,25 @@ int main() {
     // call and test each function here as you complete them
 
     //1.1
-    cout << square(5) << endl;
+    //cout << square(5) << endl;
 
     //1.2 
-    cout << celsiusToFahrenheit(0) << endl;
+    //cout << celsiusToFahrenheit(0) << endl;
     
     //1.3
-    printFullName("Lucas", "Moraes");
+   // printFullName("Lucas", "Moraes");
 
     //1.4
-    if (isEven(7)) {
-        cout << "7 is even" << endl;
-    } else {
-        cout << "7 is odd" << endl;
-    }
+    //if (isEven(7)) {
+   //     cout << "7 is even" << endl;
+   // } else {
+   //     cout << "7 is odd" << endl;
+  //  }
 
     //2.1
+  //  cout << getLetterGrade(89) << endl;
 
+    
 
     return 0;
 }
