@@ -56,6 +56,25 @@ bool isEven (int inputNum) {
 //    and returns a char representing the letter grade.
 //    90-100 = A, 80-89 = B, 70-79 = C, 60-69 = D, below 60 = F
 //    Call it in main() with at least 4 different scores and print each grade.
+ char getLetterGrade (int score) {
+    
+
+    if () {
+
+    } else if () {
+
+
+    } else if () {
+
+
+    } else {
+
+
+    }
+
+    return 0;
+}
+
 
 // 6. Write a function called maxOfThree() that takes three ints
 //    and returns the largest of the three.
@@ -119,16 +138,17 @@ bool isEven (int inputNum) {
 
 int main() {
     srand(time(0));
+    
     // call and test each function here as you complete them
 
     //1.1
-    // cout << square(5) << endl;
+    cout << square(5) << endl;
 
     //1.2 
-    //cout << celsiusToFahrenheit(0) << endl;
+    cout << celsiusToFahrenheit(0) << endl;
     
     //1.3
-    //printFullName("Lucas", "Moraes");
+    printFullName("Lucas", "Moraes");
 
     //1.4
     if (isEven(7)) {
@@ -136,6 +156,9 @@ int main() {
     } else {
         cout << "7 is odd" << endl;
     }
+
+    //2.1
+
 
     return 0;
 }
