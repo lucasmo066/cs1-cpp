@@ -97,11 +97,14 @@ int maxOfThree (int x, int y, int z) {
 //      over 20 lbs → $29.99
 //    Call it in main() with a few different weights.
 double calcShipping (double weight) {
-    double shippingCost = 4.99;
+    double shippingCost;
 
-    if (weight >=1) {
+    if (weight < 1) {
+        shippingCost = 4.99;
+    } else if (weight < 5) {
         shippingCost = 8.99;
-    } else if (weight >=5 && weight <= 20) {
+
+    } else if (weight < 20) {
         shippingCost = 14.99;
 
     } else {
@@ -186,7 +189,7 @@ int main() {
      //  cout << "also your mom is an absolute whore" << endl; 
 
      //2.3
-    cout << "Shipping Cost: " << "$" << calcShipping(45) << endl;
+    cout << "Shipping Cost: " << "$" << calcShipping(3) << endl;
 
     return 0;
 }
