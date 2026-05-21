@@ -125,9 +125,8 @@ double calcShipping (double weight) {
 int sumUpTo (int n) {
     int result = 0;
 
-    for (i=0,i < n ,i++) {
-
-
+    for (int i = 1; i <= n; i++) {
+        result += i;
     }
 
     return result; 
@@ -199,7 +198,12 @@ int main() {
      //  cout << "also your mom is an absolute whore" << endl; 
 
      //2.3
-    cout << "Shipping Cost: " << "$" << calcShipping(3) << endl;
+   // cout << "Shipping Cost: " << "$" << calcShipping(3) << endl;
+
+   //3.1
+   cout << sumUpTo(10) << endl;
+
+
 
     return 0;
 }
