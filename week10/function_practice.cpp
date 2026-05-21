@@ -122,8 +122,14 @@ double calcShipping (double weight) {
 //    and returns the sum of all integers from 1 to n.
 //    Example: sumUpTo(5) returns 15 (1+2+3+4+5)
 //    Call it in main() with a few values.
-sumUpTo() {
+int sumUpTo (int n) {
 
+
+    for (x=0,x<i ,i++) {
+
+
+    }
+    
     return 0; 
 }
 
