@@ -123,14 +123,14 @@ double calcShipping (double weight) {
 //    Example: sumUpTo(5) returns 15 (1+2+3+4+5)
 //    Call it in main() with a few values.
 int sumUpTo (int n) {
+    int result = 0;
 
-
-    for (x=0,x<i ,i++) {
+    for (i=0,i < n ,i++) {
 
 
     }
-    
-    return 0; 
+
+    return result; 
 }
 
 // 9. Write a function called printStars() that takes an int n
