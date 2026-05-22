@@ -17,6 +17,7 @@ using namespace std;
 // 1. Write a function called square() that takes an int,
 //    and returns that number multiplied by itself.
 //    Call it in main() with a few different numbers and print the results.
+
 int square (int number) {
     return number * number;
 }
@@ -24,19 +25,19 @@ int square (int number) {
 //    representing a celsius temperature and returns the fahrenheit equivalent.
 //    Formula: (celsius * 9.0 / 5.0) + 32.0
 //    Call it in main() with 0, 100, and 37 and print each result.
+
 double celsiusToFahrenheit (double celsius) {
     double fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
     return fahrenheit;
 }
-
 // 3. Write a void function called printFullName() that takes two strings,
 //    a first name and a last name, and prints them on one line.
 //    Example output: "Full name: Lucas Moraes"
 //    Call it in main() with your own name.
+
 void printFullName (string firstName, string lastName) {
     cout << "Full name: " + firstName << " " << lastName << endl;
 }
-
 // 4. Write a function called isEven() that takes an int
 //    and returns a bool — true if the number is even, false if odd.
 //    Hint: use the modulus operator %.
@@ -56,6 +57,7 @@ bool isEven (int inputNum) {
 //    and returns a char representing the letter grade.
 //    90-100 = A, 80-89 = B, 70-79 = C, 60-69 = D, below 60 = F
 //    Call it in main() with at least 4 different scores and print each grade.
+
  char getLetterGrade (int grade) {
     if (grade >= 90 ) {
         return 'A';
@@ -69,11 +71,11 @@ bool isEven (int inputNum) {
         return 'F';
     }
 }
-
 // 6. Write a function called maxOfThree() that takes three ints
 //    and returns the largest of the three.
 //    Do not use any built in max() function — use if/else logic.
 //    Call it in main() and verify it works.
+
 int maxOfThree (int x, int y, int z) {
     int largest = x;    
 
@@ -86,8 +88,6 @@ int maxOfThree (int x, int y, int z) {
 
     return largest;
 }
-
-
 // 7. Write a function called calcShipping() that takes a double weight
 //    and returns the shipping cost as a double.
 //    Use these tiers:
@@ -96,6 +96,7 @@ int maxOfThree (int x, int y, int z) {
 //      5 to 20 lbs → $14.99
 //      over 20 lbs → $29.99
 //    Call it in main() with a few different weights.
+
 double calcShipping (double weight) {
     double shippingCost;
 
@@ -113,7 +114,6 @@ double calcShipping (double weight) {
 
     return shippingCost;
 }
-
 // ------------------------------------------------------------
 // LEVEL 3 — Functions with loops
 // ------------------------------------------------------------
@@ -122,6 +122,7 @@ double calcShipping (double weight) {
 //    and returns the sum of all integers from 1 to n.
 //    Example: sumUpTo(5) returns 15 (1+2+3+4+5)
 //    Call it in main() with a few values.
+
 int sumUpTo (int n) {
     int result = 0;
 
@@ -131,12 +132,12 @@ int sumUpTo (int n) {
 
     return result; 
 }
-
 // 9. Write a function called printStars() that takes an int n
 //    and prints a row of n stars on one line.
 //    Example: printStars(4) prints ****
 //    This is a void function.
 //    Call it in main() with a few different values.
+
 void printStars(int n) {
     string stars = "";
     
@@ -146,14 +147,13 @@ void printStars(int n) {
     
     cout << stars << endl;
 }
-
-
 // 10. Write a function called countVowels() that takes a string
 //     and returns the number of vowels in it (a e i o u, lowercase only).
 //     Hint: loop through each character in the string using a for loop.
 //     string length: str.length()
 //     accessing a character: str[i]
 //     Call it in main() with a few different words.
+
 int countVowels(string inputWord) {
     int counter = 0;
 
@@ -166,9 +166,6 @@ int countVowels(string inputWord) {
 
     return counter;
 }
-
-
-
 // ------------------------------------------------------------
 // LEVEL 4 — Functions calling functions
 // ------------------------------------------------------------
@@ -183,6 +180,15 @@ int countVowels(string inputWord) {
 //     instead of redoing the math.
 //     This is a void function.
 
+void printTemperatureReport(double celsius) {
+    
+
+    if ( ) {
+
+    }
+
+    cout << << endl;
+}
 // 12. Write a function called rollDice() that takes an int numDice
 //     and returns the total of rolling that many six sided dice.
 //     It should call a helper function rollOne() that rolls a single die.
@@ -228,7 +234,10 @@ int main() {
    //cout << sumUpTo(10) << endl;
 
     //3.2
-    printStars(4);
+   //  printStars(4);
+
+    //3.3
+    cout << countVowels("hello") << endl;
 
     return 0;
 }
