@@ -1,7 +1,4 @@
 #include <iostream>
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
 using namespace std;
 
 // ============================================================
@@ -18,37 +15,37 @@ using namespace std;
 //    and returns that number multiplied by itself.
 //    Call it in main() with a few different numbers and print the results.
 
-int square (int number) {
+int square(int number) {
     return number * number;
 }
+
 // 2. Write a function called celsiusToFahrenheit() that takes a double
 //    representing a celsius temperature and returns the fahrenheit equivalent.
 //    Formula: (celsius * 9.0 / 5.0) + 32.0
 //    Call it in main() with 0, 100, and 37 and print each result.
 
-double celsiusToFahrenheit (double celsius) {
-    double fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
-    return fahrenheit;
+double celsiusToFahrenheit(double celsius) {
+    return (celsius * 9.0 / 5.0) + 32.0;
 }
+
 // 3. Write a void function called printFullName() that takes two strings,
 //    a first name and a last name, and prints them on one line.
 //    Example output: "Full name: Lucas Moraes"
 //    Call it in main() with your own name.
 
-void printFullName (string firstName, string lastName) {
-    cout << "Full name: " + firstName << " " << lastName << endl;
+void printFullName(string firstName, string lastName) {
+    cout << "Full name: " << firstName << " " << lastName << endl;
 }
+
 // 4. Write a function called isEven() that takes an int
 //    and returns a bool — true if the number is even, false if odd.
 //    Hint: use the modulus operator %.
 //    Call it in main() and print "even" or "odd" based on the result.
-bool isEven (int inputNum) {
-    if (inputNum % 2 == 0) {
-         return true;
-    } else {
-        return false;
-    }
+
+bool isEven(int inputNum) {
+    return inputNum % 2 == 0;
 }
+
 // ------------------------------------------------------------
 // LEVEL 2 — Functions with conditionals
 // ------------------------------------------------------------
@@ -58,10 +55,10 @@ bool isEven (int inputNum) {
 //    90-100 = A, 80-89 = B, 70-79 = C, 60-69 = D, below 60 = F
 //    Call it in main() with at least 4 different scores and print each grade.
 
- char getLetterGrade (int grade) {
-    if (grade >= 90 ) {
+char getLetterGrade(int grade) {
+    if (grade >= 90) {
         return 'A';
-    } else if ( grade >= 80) {
+    } else if (grade >= 80) {
         return 'B';
     } else if (grade >= 70) {
         return 'C';
@@ -71,13 +68,14 @@ bool isEven (int inputNum) {
         return 'F';
     }
 }
+
 // 6. Write a function called maxOfThree() that takes three ints
 //    and returns the largest of the three.
 //    Do not use any built in max() function — use if/else logic.
 //    Call it in main() and verify it works.
 
-int maxOfThree (int x, int y, int z) {
-    int largest = x;    
+int maxOfThree(int x, int y, int z) {
+    int largest = x;
 
     if (y > largest) {
         largest = y;
@@ -88,6 +86,7 @@ int maxOfThree (int x, int y, int z) {
 
     return largest;
 }
+
 // 7. Write a function called calcShipping() that takes a double weight
 //    and returns the shipping cost as a double.
 //    Use these tiers:
@@ -97,23 +96,18 @@ int maxOfThree (int x, int y, int z) {
 //      over 20 lbs → $29.99
 //    Call it in main() with a few different weights.
 
-double calcShipping (double weight) {
-    double shippingCost;
-
+double calcShipping(double weight) {
     if (weight < 1) {
-        shippingCost = 4.99;
+        return 4.99;
     } else if (weight < 5) {
-        shippingCost = 8.99;
-
+        return 8.99;
     } else if (weight < 20) {
-        shippingCost = 14.99;
-
+        return 14.99;
     } else {
-        shippingCost = 29.99;
+        return 29.99;
     }
-
-    return shippingCost;
 }
+
 // ------------------------------------------------------------
 // LEVEL 3 — Functions with loops
 // ------------------------------------------------------------
@@ -123,15 +117,16 @@ double calcShipping (double weight) {
 //    Example: sumUpTo(5) returns 15 (1+2+3+4+5)
 //    Call it in main() with a few values.
 
-int sumUpTo (int n) {
+int sumUpTo(int n) {
     int result = 0;
 
     for (int i = 1; i <= n; i++) {
         result += i;
     }
 
-    return result; 
+    return result;
 }
+
 // 9. Write a function called printStars() that takes an int n
 //    and prints a row of n stars on one line.
 //    Example: printStars(4) prints ****
@@ -140,13 +135,14 @@ int sumUpTo (int n) {
 
 void printStars(int n) {
     string stars = "";
-    
-    for(int i = 0; i < n; i++) {
+
+    for (int i = 0; i < n; i++) {
         stars += "*";
     }
-    
+
     cout << stars << endl;
 }
+
 // 10. Write a function called countVowels() that takes a string
 //     and returns the number of vowels in it (a e i o u, lowercase only).
 //     Hint: loop through each character in the string using a for loop.
@@ -157,15 +153,16 @@ void printStars(int n) {
 int countVowels(string inputWord) {
     int counter = 0;
 
-    for(int i = 0; i < inputWord.length(); i++) {
-        if (inputWord[i] == 'a' || inputWord[i] == 'e' || inputWord[i] == 'i' 
+    for (int i = 0; i < inputWord.length(); i++) {
+        if (inputWord[i] == 'a' || inputWord[i] == 'e' || inputWord[i] == 'i'
             || inputWord[i] == 'o' || inputWord[i] == 'u') {
             counter++;
-        }    
+        }
     }
 
     return counter;
 }
+
 // ------------------------------------------------------------
 // LEVEL 4 — Functions calling functions
 // ------------------------------------------------------------
@@ -175,14 +172,14 @@ int countVowels(string inputWord) {
 //       Celsius: 100.0
 //       Fahrenheit: 212.0
 //       Status: Boiling
-//     Status rules: below 0 = Freezing, 0-99 = Normal, 100+ = Boiling
+//     Status rules (Fahrenheit): below 0 = Freezing, 0-99 = Normal, 100+ = Boiling
 //     This function should CALL celsiusToFahrenheit() from problem 2
 //     instead of redoing the math.
 //     This is a void function.
 
 void printTemperatureReport(double celsius) {
-    string status = "";
     double fahrenheit = celsiusToFahrenheit(celsius);
+    string status;
 
     if (fahrenheit < 0) {
         status = "Freezing";
@@ -192,10 +189,11 @@ void printTemperatureReport(double celsius) {
         status = "Boiling";
     }
 
-    cout << "Celsius: "<< celsius << endl;
-    cout << "Fahrenheit: "<< fahrenheit << endl;
-    cout << "Status: "<< status << endl;
+    cout << "Celsius: " << celsius << endl;
+    cout << "Fahrenheit: " << fahrenheit << endl;
+    cout << "Status: " << status << endl;
 }
+
 // 12. Write a function called printOrderSummary() that takes a double weight
 //     and a double itemPrice, and prints a short receipt:
 //       Item price: $49.99
@@ -205,65 +203,51 @@ void printTemperatureReport(double celsius) {
 //     CALL calcShipping() from problem 7 for shipping — do not redo the tier logic.
 //     Total = itemPrice + shipping. This is a void function.
 //     Call it in main() with a couple of weight/price pairs.
+
 void printOrderSummary(double weight, double itemPrice) {
     double shippingCost = calcShipping(weight);
-    double total = shippingCost + itemPrice;
+    double total = itemPrice + shippingCost;
 
-    //Receipt Start
-    cout << "Item Price: "<< itemPrice << endl;
-    cout << "Shipping: "<< shippingCost << endl;
-    cout << "Total: "<< total << endl;
-    //Receipt End
+    cout << "Item price: $" << itemPrice << endl;
+    cout << "Weight: " << weight << " lbs" << endl;
+    cout << "Shipping: $" << shippingCost << endl;
+    cout << "Total: $" << total << endl;
 }
-
 
 // ------------------------------------------------------------
 // main() — use this to test all your functions
 // ------------------------------------------------------------
 
 int main() {
-    srand(time(0));
-    
-    // call and test each function here as you complete them
+    cout << "=== Level 1 ===" << endl;
+    cout << "square(5): " << square(5) << endl;
+    cout << "celsiusToFahrenheit(0): " << celsiusToFahrenheit(0) << endl;
+    cout << "celsiusToFahrenheit(100): " << celsiusToFahrenheit(100) << endl;
+    cout << "celsiusToFahrenheit(37): " << celsiusToFahrenheit(37) << endl;
+    printFullName("Lucas", "Moraes");
+    if (isEven(7)) {
+        cout << "7 is even" << endl;
+    } else {
+        cout << "7 is odd" << endl;
+    }
 
-    //1.1
-    //cout << square(5) << endl;
+    cout << endl << "=== Level 2 ===" << endl;
+    cout << "getLetterGrade(89): " << getLetterGrade(89) << endl;
+    cout << "maxOfThree(4, 56, 32): " << maxOfThree(4, 56, 32) << endl;
+    cout << "calcShipping(3): $" << calcShipping(3) << endl;
 
-    //1.2 
-    //cout << celsiusToFahrenheit(0) << endl;
-    
-    //1.3
-   // printFullName("Lucas", "Moraes");
+    cout << endl << "=== Level 3 ===" << endl;
+    cout << "sumUpTo(10): " << sumUpTo(10) << endl;
+    cout << "printStars(4): ";
+    printStars(4);
+    cout << "countVowels(\"hello\"): " << countVowels("hello") << endl;
 
-    //1.4
-    //if (isEven(7)) {
-   //     cout << "7 is even" << endl;
-   // } else {
-   //     cout << "7 is odd" << endl;
-  //  }
-
-    //2.1
-  //  cout << getLetterGrade(89) << endl;
-
-    //2.2
-    //  cout << maxOfThree(4,56,32) << endl;
-     //  cout << "also your mom is an absolute whore" << endl; 
-
-     //2.3
-   // cout << "Shipping Cost: " << "$" << calcShipping(3) << endl;
-
-   //3.1
-   //cout << sumUpTo(10) << endl;
-
-    //3.2
-    //  printStars(4);
-
-    //3.3
-     // cout << countVowels("hello") << endl;
-
-     //printTemperatureReport(100);
-
-     printOrderSummary(55, 67.99);
+    cout << endl << "=== Level 4 ===" << endl;
+    printTemperatureReport(100);
+    cout << endl;
+    printOrderSummary(3, 49.99);
+    cout << endl;
+    printOrderSummary(55, 67.99);
 
     return 0;
 }
