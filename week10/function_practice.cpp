@@ -181,19 +181,41 @@ int countVowels(string inputWord) {
 //     This is a void function.
 
 void printTemperatureReport(double celsius) {
-    
+    string status = "";
+    double fahrenheit = celsiusToFahrenheit(celsius);
 
-    if ( ) {
-
+    if (fahrenheit < 0) {
+        status = "Freezing";
+    } else if (fahrenheit <= 99) {
+        status = "Normal";
+    } else {
+        status = "Boiling";
     }
 
-    cout << << endl;
+    cout << "Celsius: "<< celsius << endl;
+    cout << "Fahrenheit: "<< fahrenheit << endl;
+    cout << "Status: "<< status << endl;
 }
-// 12. Write a function called rollDice() that takes an int numDice
-//     and returns the total of rolling that many six sided dice.
-//     It should call a helper function rollOne() that rolls a single die.
-//     Call rollDice() in main() with 1, 2, and 3 dice and print each total.
-//     Remember to seed srand() once in main().
+// 12. Write a function called printOrderSummary() that takes a double weight
+//     and a double itemPrice, and prints a short receipt:
+//       Item price: $49.99
+//       Weight: 3 lbs
+//       Shipping: $8.99
+//       Total: $58.98
+//     CALL calcShipping() from problem 7 for shipping — do not redo the tier logic.
+//     Total = itemPrice + shipping. This is a void function.
+//     Call it in main() with a couple of weight/price pairs.
+void printOrderSummary(double weight, double itemPrice) {
+    double shippingCost = calcShipping(weight);
+    double total = shippingCost + itemPrice;
+
+    //Receipt Start
+    cout << "Item Price: "<< itemPrice << endl;
+    cout << "Shipping: "<< shippingCost << endl;
+    cout << "Total: "<< total << endl;
+    //Receipt End
+}
+
 
 // ------------------------------------------------------------
 // main() — use this to test all your functions
@@ -234,10 +256,14 @@ int main() {
    //cout << sumUpTo(10) << endl;
 
     //3.2
-   //  printStars(4);
+    //  printStars(4);
 
     //3.3
-    cout << countVowels("hello") << endl;
+     // cout << countVowels("hello") << endl;
+
+     //printTemperatureReport(100);
+
+     printOrderSummary(55, 67.99);
 
     return 0;
 }
