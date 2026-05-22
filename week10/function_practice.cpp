@@ -155,8 +155,16 @@ void printStars(int n) {
 //     accessing a character: str[i]
 //     Call it in main() with a few different words.
 int countVowels(string inputWord) {
+    int counter = 0;
 
-return inputVowels;
+    for(int i = 0; i < inputWord.length(); i++) {
+        if (inputWord[i] == 'a' || inputWord[i] == 'e' || inputWord[i] == 'i' 
+            || inputWord[i] == 'o' || inputWord[i] == 'u') {
+            counter++;
+        }    
+    }
+
+    return counter;
 }
 
 
