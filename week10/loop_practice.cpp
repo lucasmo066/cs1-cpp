@@ -7,7 +7,7 @@ using namespace std;
 // For every problem, before writing any code answer:
 //   1. Starting state?
 //   2. Condition — when do I stop?
-//   3. What happens each pass?
+//   3. What happens each pass? 
 //   4. How do I progress?
 // Write those answers as comments above each loop.
 // ============================================================
