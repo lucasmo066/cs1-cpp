@@ -137,6 +137,16 @@ int sumUpTo (int n) {
 //    Example: printStars(4) prints ****
 //    This is a void function.
 //    Call it in main() with a few different values.
+void printStars(int n) {
+    string stars = "";
+    
+    for(int i = 0; i < n; i++) {
+        stars += "*";
+    }
+    
+    cout << stars << endl;
+}
+
 
 // 10. Write a function called countVowels() that takes a string
 //     and returns the number of vowels in it (a e i o u, lowercase only).
@@ -144,6 +154,12 @@ int sumUpTo (int n) {
 //     string length: str.length()
 //     accessing a character: str[i]
 //     Call it in main() with a few different words.
+int countVowels(string inputWord) {
+
+return inputVowels;
+}
+
+
 
 // ------------------------------------------------------------
 // LEVEL 4 — Functions calling functions
@@ -201,9 +217,10 @@ int main() {
    // cout << "Shipping Cost: " << "$" << calcShipping(3) << endl;
 
    //3.1
-   cout << sumUpTo(10) << endl;
+   //cout << sumUpTo(10) << endl;
 
-
+    //3.2
+    printStars(4);
 
     return 0;
 }
