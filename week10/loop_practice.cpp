@@ -81,6 +81,16 @@ using namespace std;
 //     Example: factorial(5) = 5*4*3*2*1 = 120
 //     Hint: same accumulation pattern as sumUpTo but multiplication.
 //     What should result be initialized to for multiplication? (not 0)
+      int factorial (int n) {
+            int resultFactorial = 1;
+           
+            for (int i = n; i >= 1; i--) {
+                resultFactorial *= i;
+            }
+
+            return resultFactorial;
+        }
+
 
 // 2c. Write a function called countDown(int start)
 //     that prints each number from start down to 1, then prints "Blast off!"
@@ -193,7 +203,7 @@ using namespace std;
 
 int main() {
 
-
+    cout << factorial(5) << endl;
 
     return 0;
 }
