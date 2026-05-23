@@ -90,8 +90,6 @@ using namespace std;
 
             return resultFactorial;
         }
-
-
 // 2c. Write a function called countDown(int start)
 //     that prints each number from start down to 1, then prints "Blast off!"
 //     This is void — no return value needed.
@@ -103,6 +101,13 @@ using namespace std;
 //       1
 //       Blast off!
 
+        void countdown(int start) {
+            for(int i = start; i >= 1; i--) {
+               cout << i << endl;
+            }
+            
+            cout << "Blast Off!" << endl;
+        }
 
 // ------------------------------------------------------------
 // PART 3 — Loops with conditions inside (filtering)
@@ -113,6 +118,18 @@ using namespace std;
 //     that returns the sum of all even numbers from 1 to n.
 //     Example: sumEvens(10) = 2+4+6+8+10 = 30
 //     Hint: loop through all numbers, only add to result if the number is even.
+
+       int sumEvens(int n) {
+        int resultSumEvens = 0;
+
+        for() {
+            
+
+        }
+
+
+         return resultSumEvens;
+    }
 
 // 3b. Write a function called countNegatives(int arr[], int size)
 //     that takes an array of ints and returns how many are negative.
@@ -203,7 +220,7 @@ using namespace std;
 
 int main() {
 
-    cout << factorial(5) << endl;
+ countdown(5);
 
     return 0;
 }
