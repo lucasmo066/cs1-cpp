@@ -122,11 +122,10 @@ using namespace std;
        int sumEvens(int n) {
         int resultSumEvens = 0;
 
-        for() {
-            
+        for(int i = 0) {
+
 
         }
-
 
          return resultSumEvens;
     }
