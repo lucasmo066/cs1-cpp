@@ -64,8 +64,17 @@ using namespace std;
 //     that returns the sum of all integers from start to end inclusive.
 //     Example: sumRange(3, 7) = 3+4+5+6+7 = 25
 //     Before writing: what is your starting state for result?
+        //starting state is int start
 //     What happens to result each pass?
+        int sumRange(int start, int end) {
+            int sum = 0;
+            
+            for(int i = start; i <= end; i++) {
+                 sum += i;
+            }
 
+            return sum;
+        }
 
 // 2b. Write a function called factorial(int n)
 //     that returns n! (n factorial).
@@ -184,17 +193,6 @@ using namespace std;
 
 int main() {
 
-    //1.a
-    printOneToTen();
-    cout << endl;
-
-    //1.b
-    printZeroToNine();
-    cout << endl;
-
-    //1.c
-    countdownFromTen();
-    cout << endl;
 
 
     return 0;
