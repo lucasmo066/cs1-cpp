@@ -11,8 +11,6 @@ using namespace std;
 //   4. How do I progress?
 // Write those answers as comments above each loop.
 // ============================================================
-
-
 // ------------------------------------------------------------
 // PART 1 — Loop boundaries (< vs <=)
 // The most common source of off-by-one errors
@@ -21,19 +19,40 @@ using namespace std;
 // 1a. Print numbers 1 through 10 inclusive.
 //     Expected output: 1 2 3 4 5 6 7 8 9 10
 //     Question: should your condition be i < 10 or i <= 10? why?
+    //This should be <= 10 since we are including 10. starting at 1, stop when i <= 10 (coudl be ==?), i++
+        void printOneToTen() {
+            for(int i = 1; i <= 10; i++) {
+                cout << i << " ";
+            }
+        }
 
 // 1b. Print numbers 0 through 9.
 //     Expected output: 0 1 2 3 4 5 6 7 8 9
 //     Question: should your condition be i < 10 or i <= 10? why?
+//i <10. 
+        void printZeroToNine() {
+            for(int i = 0; i < 10; i++) {
+                cout << i << " ";
+            }
+        }
 
 // 1c. Print every even number from 2 to 20 inclusive.
 //     Expected output: 2 4 6 8 10 12 14 16 18 20
 //     Hint: what should i start at? what should i increment by?
+        void evenTwoToTwenty() {
+            for(int i = 2; i <= 20; i += 2) {
+                cout << i << " ";
+            }
+        }
 
 // 1d. Print numbers 10 down to 1 (countdown).
 //     Expected output: 10 9 8 7 6 5 4 3 2 1
 //     Hint: loops can count down too. what does the update look like?
-
+        void countdownFromTen() {
+            for(int i = 10; i >= 1; i--) {
+                cout << i << " ";
+            }
+        }
 
 // ------------------------------------------------------------
 // PART 2 — Accumulation (building up a result)
@@ -46,6 +65,7 @@ using namespace std;
 //     Example: sumRange(3, 7) = 3+4+5+6+7 = 25
 //     Before writing: what is your starting state for result?
 //     What happens to result each pass?
+
 
 // 2b. Write a function called factorial(int n)
 //     that returns n! (n factorial).
@@ -163,6 +183,19 @@ using namespace std;
 // ------------------------------------------------------------
 
 int main() {
+
+    //1.a
+    printOneToTen();
+    cout << endl;
+
+    //1.b
+    printZeroToNine();
+    cout << endl;
+
+    //1.c
+    countdownFromTen();
+    cout << endl;
+
 
     return 0;
 }
