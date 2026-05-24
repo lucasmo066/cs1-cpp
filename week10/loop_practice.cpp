@@ -122,8 +122,9 @@ using namespace std;
        int sumEvens(int n) {
         int resultSumEvens = 0;
 
-        for(int i = 0) {
-
+        for(int i = 0, i <= n; i++) {
+            //check if the number were on is even 
+            if ( i % 2 == 0 )
 
         }
 
@@ -219,7 +220,6 @@ using namespace std;
 
 int main() {
 
- countdown(5);
 
     return 0;
 }
