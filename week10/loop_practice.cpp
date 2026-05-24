@@ -120,15 +120,17 @@ using namespace std;
 //     Hint: loop through all numbers, only add to result if the number is even.
 
        int sumEvens(int n) {
-        int resultSumEvens = 0;
+        int totalOfEvens = 0;
 
-        for(int i = 0, i <= n; i++) {
-            //check if the number were on is even 
-            if ( i % 2 == 0 )
-
+        for(int i = n; i >= 0; i -- ) { 
+            if (i % 2 == 0) {
+                totalOfEvens += i;
+            }
         }
 
-         return resultSumEvens;
+
+      
+         return totalOfEvens;
     }
 
 // 3b. Write a function called countNegatives(int arr[], int size)
