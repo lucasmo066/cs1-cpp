@@ -187,7 +187,6 @@ using namespace std;
             }
         }
 
-
 // 4b. Print a right triangle of stars given a height n.
 //     printTriangle(4) should print:
 //       *
@@ -196,6 +195,13 @@ using namespace std;
 //       ****
 //     Hint: on row i, print i stars.
 //     The inner loop's condition depends on the outer loop's variable.
+        printTriangle (int height) {
+            for (int height = 0; ) {
+                for () {
+                    
+                }
+            }
+        }
 
 // 4c. Write a function called multiplicationTable(int n)
 //     that prints an n x n multiplication table.
