@@ -195,11 +195,12 @@ using namespace std;
 //       ****
 //     Hint: on row i, print i stars.
 //     The inner loop's condition depends on the outer loop's variable.
-        printTriangle (int height) {
-            for (int height = 0; ) {
-                for () {
-                    
+        void printTriangle (int n) {
+            for (int row = 0; row < n; row++) {
+                for (int col = 0; col < row; col++) { 
+                    cout << '*'; 
                 }
+                cout << endl;
             }
         }
 
@@ -257,8 +258,7 @@ using namespace std;
 
 int main() {
 
-    int nums[] = {4, 6, 7, 2, 2, 4};
-    cout << "First Index Found: " << findFirst(nums, 6, 2) << endl;
+    printTriangle(5);
 
     return 0;
 }
