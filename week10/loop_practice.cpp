@@ -119,17 +119,15 @@ using namespace std;
 //     Example: sumEvens(10) = 2+4+6+8+10 = 30
 //     Hint: loop through all numbers, only add to result if the number is even.
 
-       int sumEvens(int n) {
+    int sumEvens(int n) {
         int totalOfEvens = 0;
 
-        for(int i = n; i >= 0; i -- ) { 
+        for(int i = n; i >= 1; i -- ) { 
             if (i % 2 == 0) {
                 totalOfEvens += i;
             }
         }
 
-
-      
          return totalOfEvens;
     }
 
@@ -137,13 +135,35 @@ using namespace std;
 //     that takes an array of ints and returns how many are negative.
 //     Example: {3, -1, -4, 1, -5} returns 3
 //     Hint: loop through the array, check each element.
+    int countNegatives(int arr[], int size) {
+        int negativeValues = 0;
+
+        for (int i = 0; i < size; i++) {
+            if (arr[i] < 0) {
+                negativeValues++;
+            }
+        }
+        
+        return negativeValues;
+    }
 
 // 3c. Write a function called findFirst(int arr[], int size, int target)
 //     that returns the INDEX of the first occurrence of target in the array.
 //     If target is not found, return -1.
 //     Example: {10, 20, 30, 40} with target 30 returns index 2
 //     This is called a linear search — you will see this constantly.
+    int findFirst (int arr[], int size, int target) {
+        int IndexFirstOccur = -1;
 
+        for (int i = 0; i < size; i++) {
+            if (arr[i] == target) {
+                IndexFirstOccur = i;
+                break;
+            }
+        }
+
+        return IndexFirstOccur;
+    }
 
 // ------------------------------------------------------------
 // PART 4 — Nested loops
@@ -222,6 +242,8 @@ using namespace std;
 
 int main() {
 
+    int nums[] = {4, 6, 7, 2, 2, 4};
+    cout << "First Index Found: " << findFirst(nums, 6, 2) << endl;
 
     return 0;
 }
