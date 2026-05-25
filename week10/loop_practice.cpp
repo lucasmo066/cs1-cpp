@@ -214,6 +214,64 @@ using namespace std;
 
 
 // ------------------------------------------------------------
+// PART 4 EXTRA — More nested loop practice (E1–E6)
+// For each: write outer/inner four-question comments, trace ONE row, then code.
+// Suggested order: E2, E3, E4, E1, E6, E5
+// ------------------------------------------------------------
+
+// E1. Write void printHollowRectangle(int width, int height)
+//     Print a hollow rectangle of stars (border only).
+//     printHollowRectangle(5, 4) should print:
+//       *****
+//       *   *
+//       *   *
+//       *****
+//     Outer = rows, inner = columns (visit every cell).
+//     Print '*' on first/last row OR first/last column; otherwise print a space.
+//     Hint: inside the inner loop, use if with row and col (both matter).
+
+// E2. Write void printNumberTriangle(int n)
+//     Same nested structure as printTriangle, but print digits.
+//     printNumberTriangle(4) should print:
+//       1
+//       12
+//       123
+//       1234
+//     Hint: inner bound grows with row (row + 1 times). Print col + 1 if row starts at 0.
+
+// E3. Write void printInvertedTriangle(int n)
+//     Stars decrease each row (opposite of printTriangle).
+//     printInvertedTriangle(4) should print:
+//       ****
+//       ***
+//       **
+//       *
+//     Before coding: on row 0, how many stars? on row 3?
+//     Hint: inner bound shrinks with row (e.g. n - row times when row starts at 0).
+
+// E4. Write int sumGrid(int n)
+//     Treat an n x n grid where each cell value is (row + 1) * (col + 1)
+//     (same values as the multiplication table). Return the sum of all cells.
+//     sumGrid(3) = 1+2+3 + 2+4+6 + 3+6+9 = 36
+//     Outer = rows, inner = cols. No cout — accumulate with += (like sumRange).
+
+// E5. Write int countStarsInTriangle(int n)
+//     How many '*' does printTriangle(n) print in total?
+//     countStarsInTriangle(4) = 1+2+3+4 = 10
+//     Use nested loops to count (or solve with math after you see the pattern).
+
+// E6. Write void printCheckerboard(int size)
+//     Print a size x size checkerboard with '#' and spaces.
+//     printCheckerboard(4) should print:
+//       # #
+//        #
+//       # #
+//        #
+//     Hint: nested loops over row/col; print '#' when (row + col) % 2 == 0, else ' '.
+//     Use endl once per row (after the inner loop).
+
+
+// ------------------------------------------------------------
 // PART 5 — While loops
 // Use when you don't know ahead of time how many iterations you need.
 // ------------------------------------------------------------
