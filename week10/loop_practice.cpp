@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 // ============================================================
@@ -211,6 +212,14 @@ using namespace std;
 //       2  4  6
 //       3  6  9
 //     Hint: use setw(3) from <iomanip> to align columns.
+        void multiplicationTable(int n) {
+            for (int row = 0; row < n; row++) {
+                for (int col = 0; col < n; col++) {
+                    cout << setw(3) << (row + 1) * (col + 1);
+                }
+                cout << endl;
+            }
+        }
 
 
 // ------------------------------------------------------------
