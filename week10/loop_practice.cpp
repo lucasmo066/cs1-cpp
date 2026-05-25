@@ -178,6 +178,15 @@ using namespace std;
 //     Outer loop = rows, inner loop = stars per row.
 //     Before writing: trace through manually.
 //     When outer i=0, how many times does the inner loop run?
+        void printRectangle (int width, int height) {
+            for (int row = 0; row < height; row++ ) {
+                for (int col = 0; col < width; col++) {
+                    cout << '*';
+                }
+                cout << endl;
+            }
+        }
+
 
 // 4b. Print a right triangle of stars given a height n.
 //     printTriangle(4) should print:
