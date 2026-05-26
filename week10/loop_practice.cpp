@@ -221,13 +221,11 @@ using namespace std;
             }
         }
 
-
 // ------------------------------------------------------------
 // PART 4 EXTRA — More nested loop practice (E1–E6)
 // For each: write outer/inner four-question comments, trace ONE row, then code.
 // Suggested order: E2, E3, E4, E1, E6, E5
 // ------------------------------------------------------------
-
 // E1. Write void printHollowRectangle(int width, int height)
 //     Print a hollow rectangle of stars (border only).
 //     printHollowRectangle(5, 4) should print:
@@ -238,6 +236,12 @@ using namespace std;
 //     Outer = rows, inner = columns (visit every cell).
 //     Print '*' on first/last row OR first/last column; otherwise print a space.
 //     Hint: inside the inner loop, use if with row and col (both matter).
+        void 
+
+
+
+
+
 
 // E2. Write void printNumberTriangle(int n)
 //     Same nested structure as printTriangle, but print digits.
