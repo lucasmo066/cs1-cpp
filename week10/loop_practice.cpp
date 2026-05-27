@@ -236,12 +236,20 @@ using namespace std;
 //     Outer = rows, inner = columns (visit every cell).
 //     Print '*' on first/last row OR first/last column; otherwise print a space.
 //     Hint: inside the inner loop, use if with row and col (both matter).
-        void 
+        void printHollowRectangle (int width, int height) {
+            for (int row = 0; row < height; row++) {
+                for (int col = 0; col < width; col++) {
+                    if ( col == 0 || col == width - 1 || row == 0 || row == height - 1) {
+                        cout << '*';
+                    } else {
+                        cout << ' ';
+                    }
+                }
+               cout << endl; 
+            }
+        }
 
-
-
-
-
+        
 
 // E2. Write void printNumberTriangle(int n)
 //     Same nested structure as printTriangle, but print digits.
@@ -251,6 +259,15 @@ using namespace std;
 //       123
 //       1234
 //     Hint: inner bound grows with row (row + 1 times). Print col + 1 if row starts at 0.
+
+        void printNumberTriangle (int n) {
+            for (int row = 0; row < n; row++ ) {
+                for (int col = 0; col < row + 1; col++) {
+                    cout << col + 1 <<' ';
+                }
+                cout << endl;
+            }
+        }
 
 // E3. Write void printInvertedTriangle(int n)
 //     Stars decrease each row (opposite of printTriangle).
@@ -262,11 +279,33 @@ using namespace std;
 //     Before coding: on row 0, how many stars? on row 3?
 //     Hint: inner bound shrinks with row (e.g. n - row times when row starts at 0).
 
+        void printInvertedTriangle (int n) {
+            for (int row = 0; row < n; row++) {
+                //keep going while col is less than (n-row)
+                for (int col = 0; col < n - row; col++) {
+                    cout << '*';
+                }
+                cout << endl;
+            }
+        }
+
 // E4. Write int sumGrid(int n)
 //     Treat an n x n grid where each cell value is (row + 1) * (col + 1)
 //     (same values as the multiplication table). Return the sum of all cells.
 //     sumGrid(3) = 1+2+3 + 2+4+6 + 3+6+9 = 36
 //     Outer = rows, inner = cols. No cout — accumulate with += (like sumRange).
+        int sumGrid (int n) {
+            int sumOfCells = 0;
+
+            for (int row = 0; row < n; row++) {
+                for (int col = 0; col < n; col++) {
+                   sumOfCells += (row + 1) * (col + 1);
+                }
+            }
+
+            return sumOfCells;
+        }
+
 
 // E5. Write int countStarsInTriangle(int n)
 //     How many '*' does printTriangle(n) print in total?
@@ -282,7 +321,6 @@ using namespace std;
 //        #
 //     Hint: nested loops over row/col; print '#' when (row + col) % 2 == 0, else ' '.
 //     Use endl once per row (after the inner loop).
-
 
 // ------------------------------------------------------------
 // PART 5 — While loops
@@ -329,7 +367,7 @@ using namespace std;
 
 int main() {
 
-    printTriangle(5);
+ printHollowRectangle(5,6);
 
     return 0;
 }
