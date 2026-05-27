@@ -351,15 +351,20 @@ using namespace std;
 //     that keeps asking the user for a number until they enter
 //     a positive one, then returns it.
 //     This is called an input validation loop — you will use this constantly.
-//
-//     int num;
-//     cout << "Enter a positive number: ";
-//     cin >> num;
-//     while (???) {
-//         cout << "Invalid. Try again: ";
-//         cin >> num;
-//     }
-//     return num;
+
+        int getPositiveInput () {
+            int num;
+            
+            cout << "Enter a positive number: ";
+            cin >> num;
+
+            while (num < 0) {
+               cout << "Invalid. Try again: ";
+                  cin >> num;
+             }
+            
+             return num;
+        }
 
 // 5b. Write a function called digitSum(int n)
 //     that returns the sum of all digits in a number.
@@ -372,13 +377,19 @@ using namespace std;
 //       n=12:   last digit = 2, n becomes 1
 //       n=1:    last digit = 1, n becomes 0
 //       stop.
+        int digitSum (int n) {
+            int sumDigits = 0;
 
-// 5c. Write a function called isPrime(int n)
-//     that returns true if n is prime, false otherwise.
-//     A prime number is only divisible by 1 and itself.
-//     Hint: loop from 2 to n-1, check if any number divides n evenly.
-//     If you find one that does, it is not prime — return false immediately.
-//     If the loop finishes without finding one, return true.
+            while (n > 0) {
+                int lastDig = n % 10;
+                sumDigits += lastDig;
+                n = n / 10; 
+            }
+
+            return sumDigits;
+        }
+
+
 
 
 // ------------------------------------------------------------
@@ -387,7 +398,7 @@ using namespace std;
 
 int main() {
 
-   cout << countStarsInTriangle(4) << endl;
+   cout << digitSum(3478);
 
     return 0;
 }
