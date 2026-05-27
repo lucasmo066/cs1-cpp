@@ -249,8 +249,6 @@ using namespace std;
             }
         }
 
-        
-
 // E2. Write void printNumberTriangle(int n)
 //     Same nested structure as printTriangle, but print digits.
 //     printNumberTriangle(4) should print:
@@ -261,7 +259,7 @@ using namespace std;
 //     Hint: inner bound grows with row (row + 1 times). Print col + 1 if row starts at 0.
 
         void printNumberTriangle (int n) {
-            for (int row = 0; row < n; row++ ) {
+            for (int row = 0; row < n; row++) {
                 for (int col = 0; col < row + 1; col++) {
                     cout << col + 1 <<' ';
                 }
@@ -311,15 +309,17 @@ using namespace std;
 //     How many '*' does printTriangle(n) print in total?
 //     countStarsInTriangle(4) = 1+2+3+4 = 10
 //     Use nested loops to count (or solve with math after you see the pattern).
+        int countStarsInTriangle (int n) {
+            int starCounter = 0; 
 
+            for(int row = 0; row < n; row++) {
+                for (int col = 0; col < row + 1; col++) {
+                    starCounter++;
+                }
+            }
 
-
-
-
-
-
-
-
+            return starCounter;
+        }
 // E6. Write void printCheckerboard(int size)
 //     Print a size x size checkerboard with '#' and spaces.
 //     printCheckerboard(4) should print:
@@ -387,7 +387,7 @@ using namespace std;
 
 int main() {
 
-    printCheckerboard(6);
+   cout << countStarsInTriangle(4) << endl;
 
     return 0;
 }
