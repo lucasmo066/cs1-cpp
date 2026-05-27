@@ -312,6 +312,14 @@ using namespace std;
 //     countStarsInTriangle(4) = 1+2+3+4 = 10
 //     Use nested loops to count (or solve with math after you see the pattern).
 
+
+
+
+
+
+
+
+
 // E6. Write void printCheckerboard(int size)
 //     Print a size x size checkerboard with '#' and spaces.
 //     printCheckerboard(4) should print:
@@ -321,6 +329,18 @@ using namespace std;
 //        #
 //     Hint: nested loops over row/col; print '#' when (row + col) % 2 == 0, else ' '.
 //     Use endl once per row (after the inner loop).
+        void printCheckerboard (int size) {
+            for (int row = 0; row < size; row++) {
+                for (int col = 0; col < size; col++) {
+                    if ((row + col) % 2 == 0) {
+                        cout << '#';
+                    } else {
+                        cout << ' ';
+                    }
+                }
+                cout << endl;
+            }
+        }
 
 // ------------------------------------------------------------
 // PART 5 — While loops
@@ -367,7 +387,7 @@ using namespace std;
 
 int main() {
 
- printHollowRectangle(5,6);
+    printCheckerboard(6);
 
     return 0;
 }
