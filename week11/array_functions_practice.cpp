@@ -61,6 +61,9 @@ using namespace std;
 //     Hint: cast to double before dividing so you don't truncate.
 //     Defensive: if size <= 0, return 0.0 (cannot divide by zero elements).
 
+double averageArray(int arr[], int size) {
+
+}
 
 // 1c. Write a function called maxValue that returns the largest element.
 //     Example: {3, 9, 1} → 9
