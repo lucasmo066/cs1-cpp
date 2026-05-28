@@ -10,6 +10,9 @@ using namespace std;
 //
 // Compare to iterative factorial in week10/loop_practice.cpp (Part 2b).
 //
+// Defensive programming: invalid inputs are a separate base case BEFORE the
+// recursive case (e.g. negative n → return -1, do not recurse).
+//
 // Compile:
 //   g++ -std=c++17 -Wall -o recursion_worksheet recursion_worksheet.cpp
 // ============================================================
@@ -41,6 +44,7 @@ using namespace std;
 //     Example: factorialRecursive(5) → 120
 //     Base case: n <= 1 → return 1
 //     Recursive: return n * factorialRecursive(n - 1)
+//     Defensive: if n < 0, return -1 (invalid; do not recurse).
 //
 // TRACE HERE (factorial(4)):
 //
@@ -58,6 +62,7 @@ using namespace std;
 //     Example: powerRecursive(2, 5) → 32
 //     Base: exp == 0 → return 1
 //     Recursive: base * powerRecursive(base, exp - 1)
+//     Defensive: if exp < 0, return -1.
 //
 // TRACE HERE (powerRecursive(2, 4)):
 //

@@ -41,7 +41,12 @@ using namespace std;
 //   - For 4: exit
 //   - Repeat until quit
 //
-// Edge cases (print an error message, don't call the helper):
+// Defensive programming at the CALLER (main/menu):
+//   Validate user input before calling helpers — print error, don't call.
+//   Your recursive helpers should ALSO guard (e.g. n < 0) so they are safe
+//   even if another function calls them later without checking.
+//
+// Edge cases in main:
 //   - Factorial: n < 0
 //   - Power: exp < 0
 //   - Fib: n < 0

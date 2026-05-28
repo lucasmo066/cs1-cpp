@@ -16,6 +16,9 @@ using namespace std;
 //
 // Compile:
 //   g++ -std=c++17 -Wall -o pass_by_reference pass_by_reference.cpp
+//
+// Defensive programming: same habit as array_functions_practice — check at
+// the top before shifting elements or writing through references.
 // ============================================================
 
 // 1. Write void swap(int& a, int& b) — exchange two ints in the caller's scope.
@@ -27,16 +30,18 @@ using namespace std;
 
 
 // 3. Write void findMinMax(int arr[], int size, int& minOut, int& maxOut)
-//    Assume size >= 1. Set minOut and maxOut to the min/max in the array.
+//    Set minOut and maxOut to the min/max in the array.
 //    Example:
 //      int lo, hi;
 //      findMinMax(data, 5, lo, hi);
+//    Defensive: if size < 1, print an error and return (do not read arr[0]).
 
 
 // 4. Write bool removeFirst(int arr[], int& size, int target)
 //    If target is found: shift elements left, decrement size, return true.
 //    If not found: return false, size unchanged.
 //    Example: {10,20,30}, size=3, target=20 → {10,30,?}, size=2
+//    Defensive: if size <= 0, return false (nothing to remove).
 
 
 // 5. Write void sortTwo(int& a, int& b) — leave a <= b (swap if needed).
