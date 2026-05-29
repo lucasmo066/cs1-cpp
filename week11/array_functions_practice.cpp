@@ -62,13 +62,26 @@ using namespace std;
 //     Defensive: if size <= 0, return 0.0 (cannot divide by zero elements).
 
 double averageArray(int arr[], int size) {
+    if (size <= 0) {
+        return 0.0;
+    }
 
+    // TODO: sum the array (loop or call sumArray), cast to double, divide by size
+    return 0.0;
 }
 
 // 1c. Write a function called maxValue that returns the largest element.
 //     Example: {3, 9, 1} → 9
 //     Defensive: if size < 1, return -1 (sentinel for "no valid data").
 
+int maxValue(int arr[], int size) {
+    if (size < 1) {
+        return -1;
+    }
+
+    // TODO: loop, track largest seen, return it
+    return 0;
+}
 
 // 1d. Write a function called minValue that returns the smallest element.
 //     Defensive: same invalid-size policy as maxValue.
