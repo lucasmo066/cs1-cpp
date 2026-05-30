@@ -86,6 +86,14 @@ int maxValue(int arr[], int size) {
 // 1d. Write a function called minValue that returns the smallest element.
 //     Defensive: same invalid-size policy as maxValue.
 
+int minValue(int arr[], int size) {
+    if (size < 1) {
+        return -1;
+    }
+
+    // TODO: loop, track smallest seen, return it
+    return 0;
+}
 
 // 1e. Write a function called maxIndex that returns the INDEX of the
 //     largest element. If the max appears more than once, return the first.
