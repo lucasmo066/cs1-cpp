@@ -219,6 +219,15 @@ void reverseInPlace(int arr[], int size) {
 //     line, space-separated, then endl.
 //     Example: {10, 20, 30} prints: 10 20 30
 
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i];
+        if (i < size - 1) {
+            cout << " ";
+        }
+    }
+    cout << endl;
+}
 
 // 3b. Write a void function called printStats that prints:
 //       Sum: ...
@@ -231,6 +240,17 @@ void reverseInPlace(int arr[], int size) {
 //     helpers with bad size — your helpers should already guard, but main-style
 //     functions often check once up front).
 
+void printStats(int arr[], int size) {
+    if (size <= 0) {
+        cout << "Error: cannot print stats for empty array." << endl;
+        return;
+    }
+
+    cout << "Sum: " << sumArray(arr, size) << endl;
+    cout << "Min: " << minValue(arr, size) << endl;
+    cout << "Max: " << maxValue(arr, size) << endl;
+    cout << "Average: " << averageArray(arr, size) << endl;
+}
 
 // 3c. Write a void function called scaleToMax100 that modifies arr in place
 //     so the largest value becomes 100; every other value scales by the same ratio.
@@ -242,6 +262,20 @@ void reverseInPlace(int arr[], int size) {
 //       3. For each i: arr[i] = (arr[i] * 100) / max;
 //     Defensive: if size <= 0, return immediately.
 
+void scaleToMax100(int arr[], int size) {
+    if (size <= 0) {
+        return;
+    }
+
+    int max = maxValue(arr, size);
+    if (max == 0) {
+        return;
+    }
+
+    for (int i = 0; i < size; i++) {
+        arr[i] = (arr[i] * 100) / max;
+    }
+}
 
 // ------------------------------------------------------------
 // PART 4 — Copy and compare
@@ -331,6 +365,11 @@ void runTests() {
     int rev[] = {1, 2, 3, 4};
     reverseInPlace(rev, 4);
     assert(rev[0] == 4 && rev[3] == 1);
+
+    // Part 3
+    int scale[] = {2, 4, 6};
+    scaleToMax100(scale, 3);
+    assert(scale[2] == 100);
 
     // Defensive
     assert(sumArray(b, 0) == 0);
