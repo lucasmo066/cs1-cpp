@@ -99,6 +99,88 @@ using namespace std;
 //     Hint: swap from both ends moving inward (temp variable is fine).
 //     Defensive: if size <= 1, return (already reversed or empty).
 
+// 1a. sumArray
+int sumArray(const int arr[], int size) {
+    if (size <= 0) return 0;
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+// 1b. averageArray
+double averageArray(const int arr[], int size) {
+    if (size <= 0) return 0.0;
+    int total = sumArray(arr, size);
+    return static_cast<double>(total) / size;
+}
+// 1d. minValue
+int minValue(const int arr[], int size) {
+    if (size < 1) return -1;
+    int min = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
+// 1c. maxValue
+int maxValue(const int arr[], int size) {
+    if (size < 1) return -1;
+    int max = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+// 1e. Write a function called maxIndex that returns the INDEX of the
+//     largest element. If the max appears more than once, return the first.
+//     Example: {3, 9, 1, 9} → 1  (not 3)
+//     Defensive: if size < 1, return -1.
+int maxIndex(const int arr[], int size) {
+    if (size < 1) return -1;
+    int maxIdx = 0;
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > arr[maxIdx]) {
+            maxIdx = i;
+        }
+    }
+    return maxIdx;
+}
+
+// 2a. contains
+bool contains(const int arr[], int size, int target) {
+    if (size <= 0) return false;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) return true;
+    }
+    return false;
+}
+
+// 2b. countValue
+int countValue(const int arr[], int size, int value) {
+    if (size <= 0) return 0;
+    int count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == value) count++;
+    }
+    return count;
+}
+
+// 2c. fillArray
+void fillArray(int arr[], int size, int value) {
+    if (size <= 0) return;
+    for (int i = 0; i < size; i++) {
+        arr[i] = value;
+    }
+}
+
 
 // ------------------------------------------------------------
 // PART 3 — Functions calling functions
@@ -196,12 +278,43 @@ using namespace std;
 //   assert(contains(b, 0, 10) == false);
 // ------------------------------------------------------------
 
+void runTests() {
+    int a[] = {3, -1, 4, -1, 5};
+    int b[] = {10, 20, 30};
+    int e[] = {1, 2, 2, 2, 3};
+
+    // Part 1
+    assert(sumArray(a, 5) == 10);
+    assert(sumArray(b, 3) == 60);
+    assert(averageArray(b, 3) == 20.0);
+    assert(maxValue(a, 5) == 5);
+    assert(minValue(a, 5) == -1);
+    assert(maxIndex(a, 5) == 4);
+
+    // Part 2
+    assert(contains(a, 5, 4) == true);
+    assert(contains(a, 5, 99) == false);
+    assert(countValue(e, 5, 2) == 3);
+
+    int fillTest[5] = {1, 2, 3, 4, 5};
+    fillArray(fillTest, 5, 0);
+    for (int i = 0; i < 5; i++) {
+        assert(fillTest[i] == 0);
+    }
+
+    // Defensive
+    assert(sumArray(b, 0) == 0);
+    assert(averageArray(b, 0) == 0.0);
+    assert(maxValue(b, 0) == -1);
+    assert(contains(b, 0, 10) == false);
+}
 
 // ------------------------------------------------------------
 // main() — call runTests() and/or try your own arrays
 // ------------------------------------------------------------
 
 int main() {
-
+    runTests();
+    cout << "All tests passed." << endl;
     return 0;
 }
