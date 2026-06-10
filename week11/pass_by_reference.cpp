@@ -1,59 +1,153 @@
 #include <iostream>
 #include <cassert>
+#include <string>
 using namespace std;
 
 // ============================================================
-// PASS BY REFERENCE — Week 11 (short focused drill)
+// PASS BY REFERENCE — Week 11 (focused drill)
 // Do AFTER array_functions_practice.
 //
-// Write each function yourself under the prompt — signature and body.
+// Key ideas to nail before OOP:
+//   - Pass-by-value: function gets a copy, original untouched.
+//   - Pass-by-reference (int& x): function works with the original directly.
+//   - const reference (const int& x): read-only access, no copy, no modify.
+//   - int arr[] already passes array data by reference — size does NOT.
+//     If you need the caller's size to change, pass int& size.
 //
-// Key ideas:
-//   - Pass-by-value copies — changes inside the function don't affect caller.
-//   - Pass-by-reference (int& x) — changes stick in the caller's variable.
-//   - int arr[] already passes array data by reference; use int& for a single
-//     int the caller owns (size, minOut, maxOut, etc.).
+// Why this matters for OOP:
+//   In CS2 every function that takes an object will use one of:
+//     void modify(Player& p)        — changes the object
+//     void display(const Player& p) — reads the object, no copy, no modify
+//   You are building that muscle now with ints and arrays.
 //
 // Compile:
 //   g++ -std=c++17 -Wall -o pass_by_reference pass_by_reference.cpp
-//
-// Defensive programming: same habit as array_functions_practice — check at
-// the top before shifting elements or writing through references.
 // ============================================================
 
-// 1. Write void swap(int& a, int& b) — exchange two ints in the caller's scope.
-//    Hint: classic three-way swap with a temp variable.
+// ------------------------------------------------------------
+// PART 1 — Single variable reference (core mechanics)
+// ------------------------------------------------------------
+
+// 1. Write void swap(int& a, int& b)
+//    Exchange two ints in the caller's scope.
+//    Hint: classic three-variable swap with a temp.
+//    After: int x=3, y=7; swap(x,y); → x==7, y==3
 
 
-// 2. Write void doubleValue(int& n) — multiply the caller's variable by 2.
-//    Example: int x = 5; doubleValue(x);  // x is now 10
+// 2. Write void doubleValue(int& n)
+//    Multiply the caller's variable by 2 in place.
+//    After: int x=5; doubleValue(x); → x==10
 
 
-// 3. Write void findMinMax(int arr[], int size, int& minOut, int& maxOut)
-//    Set minOut and maxOut to the min/max in the array.
-//    Example:
-//      int lo, hi;
-//      findMinMax(data, 5, lo, hi);
-//    Defensive: if size < 1, print an error and return (do not read arr[0]).
+// 3. Write void clampValue(int& n, int lo, int hi)
+//    If n < lo set it to lo; if n > hi set it to hi; else leave it.
+//    Example: clampValue(n, 0, 100) — keeps n in [0, 100].
+//    Why this matters: you will write this exact pattern for parameter
+//    validation in OOP (keeping a health bar between 0 and maxHealth, etc.)
 
 
-// 4. Write bool removeFirst(int arr[], int& size, int target)
-//    If target is found: shift elements left, decrement size, return true.
-//    If not found: return false, size unchanged.
-//    Example: {10,20,30}, size=3, target=20 → {10,30,?}, size=2
-//    Defensive: if size <= 0, return false (nothing to remove).
-
-
-// 5. Write void sortTwo(int& a, int& b) — leave a <= b (swap if needed).
-
-
-// 6. (Think about, no code required) — findMinMax gets two outputs in one pass.
-//    Compare to separate minValue/maxValue from array_functions_practice.cpp.
-//    When would you return one value vs use out-parameters?
+// 4. Write void sortTwo(int& a, int& b)
+//    Leave a <= b — swap if needed.
+//    After: int x=9, y=3; sortTwo(x,y); → x==3, y==9
 
 
 // ------------------------------------------------------------
-// Testing — write void runTests() and uncomment asserts as you go:
+// PART 2 — Multiple outputs from one function
+// (The main reason pass-by-reference exists.)
+// ------------------------------------------------------------
+
+// 5. Write void findMinMax(int arr[], int size, int& minOut, int& maxOut)
+//    Set minOut and maxOut to the min and max in one pass.
+//    Defensive: if size < 1, print an error and return.
+//    Note: one pass over the array is enough — update both in the same loop.
+
+
+// 6. Write void splitEvenOdd(int arr[], int size, int& evenCount, int& oddCount)
+//    Count how many elements are even and how many are odd.
+//    Set both via reference — two outputs, one loop.
+//    Defensive: if size <= 0, set both to 0 and return.
+
+
+// 7. Write void calcStats(int arr[], int size,
+//                         int& outMin, int& outMax,
+//                         double& outAvg)
+//    Fill all three output parameters in one function call.
+//    Caller declares the variables, passes them in, reads them after.
+//    Defensive: if size < 1, print an error and return without writing
+//    through the references (undefined values are safer than garbage).
+//    This is the OOP constructor pattern — object receives data,
+//    fills multiple internal fields in one call.
+
+
+// ------------------------------------------------------------
+// PART 3 — Reference + array size changes
+// ------------------------------------------------------------
+
+// 8. Write bool removeFirst(int arr[], int& size, int target)
+//    If target is found: shift elements left, decrement size, return true.
+//    If not found: return false, size unchanged.
+//    Example: arr={10,20,30}, size=3, target=20 → arr={10,30,?}, size=2
+//    Defensive: if size <= 0, return false.
+//    Why int& size: the caller's size variable must shrink — pass by value
+//    would leave the caller's size untouched after the call.
+
+
+// 9. Write bool insertAt(int arr[], int& size, int capacity,
+//                        int index, int value)
+//    Shift elements right from index onward, insert value at index,
+//    increment size, return true.
+//    If size >= capacity (array full) or index out of range, return false.
+//    Example: arr={10,20,30}, size=3, capacity=5, index=1, value=99
+//             → arr={10,99,20,30,?}, size=4
+//    Defensive: check size >= capacity AND index < 0 || index > size.
+
+
+// ------------------------------------------------------------
+// PART 4 — const reference (read-only, no copy)
+// ------------------------------------------------------------
+
+// 10. Write void printArrayInfo(const int arr[], int size, const string& label)
+//     Print:  <label>: [e1, e2, e3, ...]  (comma-space separated, brackets)
+//     Example: printArrayInfo(data, 3, "scores") → scores: [10, 20, 30]
+//     const string& label — no copy of the string, but cannot modify it.
+//     This is the pattern for every display/print function in OOP.
+//     Defensive: if size <= 0, print label + ": []"
+
+
+// 11. Write bool isSorted(const int arr[], int size)
+//     Return true if arr is non-decreasing (each element >= previous).
+//     const because we are only reading — should never modify.
+//     Example: {1,2,2,5} → true    {1,3,2,5} → false
+//     Defensive: size <= 1 → return true (0 or 1 element is trivially sorted)
+
+
+// ------------------------------------------------------------
+// PART 5 — Think-about (no code required, write answer in comments)
+// ------------------------------------------------------------
+
+// 12. You have these two signatures:
+//       void displayPlayer(Player p)
+//       void displayPlayer(const Player& p)
+//     Assume Player holds a name, team, and 20 stat fields.
+//     a) Which version copies the object? Which doesn't?
+//     b) Can either version modify the caller's Player?
+//     c) Which would you use in production and why?
+//     Write your answers as comments below.
+
+// Answer 12a:
+// Answer 12b:
+// Answer 12c:
+
+
+// 13. Why does removeFirst need int& size but findMinMax does NOT need
+//     int& size? Write your reasoning as a comment.
+
+// Answer 13:
+
+
+// ------------------------------------------------------------
+// PART 6 — Testing
+// Write void runTests() — uncomment one block at a time.
 //
 //   int x = 3, y = 7;
 //   swap(x, y);
@@ -63,22 +157,39 @@ using namespace std;
 //   doubleValue(n);
 //   assert(n == 10);
 //
-//   int data[] = {4, -2, 9, 9, 1};
+//   int c = 150;
+//   clampValue(c, 0, 100);
+//   assert(c == 100);
+//
+//   int a = 9, b = 3;
+//   sortTwo(a, b);
+//   assert(a == 3 && b == 9);
+//
+//   int data[] = {4, -2, 9, 1, 7};
 //   int lo = 0, hi = 0;
 //   findMinMax(data, 5, lo, hi);
 //   assert(lo == -2 && hi == 9);
 //
-//   int a = 10, b = 5;
-//   sortTwo(a, b);
-//   assert(a == 5 && b == 10);
+//   int ev = 0, od = 0;
+//   splitEvenOdd(data, 5, ev, od);
+//   assert(ev == 2 && od == 3);
 //
 //   int arr[] = {1, 2, 3};
 //   int sz = 3;
 //   assert(removeFirst(arr, sz, 2) == true);
 //   assert(sz == 2 && arr[0] == 1 && arr[1] == 3);
+//
+//   assert(isSorted(data, 5) == false);
+//   int sorted[] = {1, 3, 5, 7};
+//   assert(isSorted(sorted, 4) == true);
 // ------------------------------------------------------------
 
-int main() {
+void runTests() {
 
+}
+
+int main() {
+    runTests();
+    cout << "All tests passed." << endl;
     return 0;
 }
