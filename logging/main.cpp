@@ -1,0 +1,29 @@
+#include "logger.h"
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    cout << "=== Logging system demo ===" << endl;
+    cout << "Output goes to console and program.log (append mode)." << endl << endl;
+
+    // One argument — INFO by default (overload 1).
+    log("Application started");
+
+    // Two arguments — specify level (overload 2).
+    log("Cache warmed successfully", LogLevel::DEBUG);
+    log("Disk space below 10%", LogLevel::WARNING);
+
+    // Three arguments — level plus context (overload 3).
+    log("Database connection failed", LogLevel::ERROR, "user_id:8823");
+    log("Unhandled exception in payment module", LogLevel::CRITICAL, "order_id:44102");
+
+    // Default parameters on writeLogEntry — omit level and/or context.
+    writeLogEntry("Shutdown signal received");                         // INFO, no context
+    writeLogEntry("Retrying connection", LogLevel::WARNING);           // WARNING, no context
+    writeLogEntry("Request timed out", LogLevel::ERROR, "endpoint:/api/v1/users");
+
+    cout << endl << "Done. Check program.log in this folder." << endl;
+    return 0;
+}

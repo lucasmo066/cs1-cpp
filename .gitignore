@@ -1,2 +1,6 @@
 # Cursor IDE (local rules, settings)
 .cursor/
+
+# Generated log files
+program.log
+logging/program.log
