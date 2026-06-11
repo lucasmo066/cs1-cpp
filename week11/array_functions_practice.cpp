@@ -101,14 +101,16 @@ int minValue (int arr[], int size) {
 
 int maxIndex(int arr[], int size) { 
     if (size < 1) return -1;
-    int indexMax = arr[0];
+    int indexMax = 0;
 
-    for () {
-
+    for (int i = 1; i < size; i++) {
+        //every iteration we want to find out if i is the largest element in indexMax
+        if (arr[i] > arr[indexMax]) {
+         indexMax = i;   
+        }
     }
 
     return indexMax;
-
 }
 
 // ------------------------------------------------------------
@@ -117,12 +119,34 @@ int maxIndex(int arr[], int size) {
 
 // 2a. contains — return true if target appears anywhere.
 //     Defensive: size <= 0 → return false
+bool contains (int arr[], int size, int target) {
+    if (size <= 0) return false;
 
+    //loop through array and ask if element == target 
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+            return true;
+        } 
+    }
+
+    return false;
+}
 
 // 2b. countValue — return how many times value appears.
 //     Example: {1, 2, 2, 2, 3}, value 2 → 3
 //     Defensive: size <= 0 → return 0
+int countValue(int arr[], int size, int inputValue) {
+    if (size <= 0) return 0;
+    int amount = 0;
 
+    for (int i = 0; i < size; i++) {
+            if (arr[i] == inputValue) {
+                amount++;
+            }
+    }
+
+    return amount;
+}
 
 // 2c. fillArray (void) — set every element to value.
 //     After fillArray(arr, 5, 0), all five slots should be 0.
@@ -179,9 +203,9 @@ int maxIndex(int arr[], int size) {
 // ------------------------------------------------------------
 
 void runTests() {
-    int a[] = {3, -1, 4, -1, 5};
-    int b[] = {10, 20, 30};
-  //  int e[] = {1, 2, 2, 2, 3};
+    int a[] = {3, -1, 4, -1, 5};    // 5 with negatives
+    int b[] = {10, 20, 30};        // 3
+    int e[] = {1, 2, 2, 2, 3};    // 5
 
     // Part 1
      assert(sumArray(a, 5) == 10);
@@ -189,12 +213,12 @@ void runTests() {
      assert(averageArray(b, 3) == 20.0);
      assert(maxValue(a, 5) == 5);
      assert(minValue(a, 5) == -1);
-  //   assert(maxIndex(a, 5) == 4);
+     assert(maxIndex(a, 5) == 4);
 
     // Part 2
-    // assert(contains(a, 5, 4) == true);
-    // assert(contains(a, 5, 99) == false);
-    // assert(countValue(e, 5, 2) == 3);
+     assert(contains(a, 5, 4) == true);
+     assert(contains(a, 5, 99) == false);
+     assert(countValue(e, 5, 2) == 3);
     // int fillTest[] = {1, 2, 3};
     // fillArray(fillTest, 3, 0);
     // assert(fillTest[0] == 0 && fillTest[1] == 0 && fillTest[2] == 0);
@@ -217,7 +241,7 @@ void runTests() {
      assert(sumArray(b, 0) == 0);
      assert(averageArray(b, 0) == 0.0);
      assert(maxValue(b, 0) == -1);
-    // assert(contains(b, 0, 10) == false);
+     assert(contains(b, 0, 10) == false);
 }
 
 int main() {
