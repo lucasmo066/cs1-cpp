@@ -30,11 +30,21 @@ using namespace std;
 // PART 1 — Core array utilities
 // Each function takes int arr[] and int size.
 // ------------------------------------------------------------
-
 // 1a. sumArray — return sum of all elements.
 //     Example: {3, -1, 4} with size 3 → 6
 //     Defensive: size <= 0 → return 0
 
+int sumArray (int arr[], int size) {
+    if (size <= 0) return 0;
+
+    int sum = 0;
+
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+
+    return sum;
+}
 
 // 1b. averageArray — return arithmetic mean as double.
 //     Example: {10, 20, 30} → 20.0
@@ -130,8 +140,8 @@ void runTests() {
     int e[] = {1, 2, 2, 2, 3};
 
     // Part 1
-    // assert(sumArray(a, 5) == 10);
-    // assert(sumArray(b, 3) == 60);
+     assert(sumArray(a, 5) == 10);
+     assert(sumArray(b, 3) == 60);
     // assert(averageArray(b, 3) == 20.0);
     // assert(maxValue(a, 5) == 5);
     // assert(minValue(a, 5) == -1);
@@ -160,7 +170,7 @@ void runTests() {
     // assert(countAboveAverage(b, 3) == 1);
 
     // Defensive
-    // assert(sumArray(b, 0) == 0);
+     assert(sumArray(b, 0) == 0);
     // assert(averageArray(b, 0) == 0.0);
     // assert(maxValue(b, 0) == -1);
     // assert(contains(b, 0, 10) == false);
