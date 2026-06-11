@@ -78,6 +78,20 @@ int maxValue (int arr[], int size) {
 
 // 1d. minValue — return the smallest element.
 //     Defensive: size < 1 → return -1
+int minValue (int arr[], int size) {
+    //if theres nothing in the array, return error
+    if (size < 1) return -1; 
+    //begin minimum with first value in the array
+    int minimum = arr[0];
+
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minimum) {
+            minimum = arr[i];
+        }
+    }
+
+    return minimum;
+}
 
 
 // 1e. maxIndex — return the INDEX of the largest element.
@@ -85,6 +99,17 @@ int maxValue (int arr[], int size) {
 //     Example: {3, 9, 1, 9} → 1
 //     Defensive: size < 1 → return -1
 
+int maxIndex(int arr[], int size) { 
+    if (size < 1) return -1;
+    int indexMax = arr[0];
+
+    for () {
+
+    }
+
+    return indexMax;
+
+}
 
 // ------------------------------------------------------------
 // PART 2 — Search and in-place changes
@@ -163,7 +188,7 @@ void runTests() {
      assert(sumArray(b, 3) == 60);
      assert(averageArray(b, 3) == 20.0);
      assert(maxValue(a, 5) == 5);
-   //  assert(minValue(a, 5) == -1);
+     assert(minValue(a, 5) == -1);
   //   assert(maxIndex(a, 5) == 4);
 
     // Part 2
@@ -191,7 +216,7 @@ void runTests() {
     // Defensive
      assert(sumArray(b, 0) == 0);
      assert(averageArray(b, 0) == 0.0);
-    // assert(maxValue(b, 0) == -1);
+     assert(maxValue(b, 0) == -1);
     // assert(contains(b, 0, 10) == false);
 }
 
