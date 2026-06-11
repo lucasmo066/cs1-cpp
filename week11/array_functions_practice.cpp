@@ -36,7 +36,6 @@ using namespace std;
 
 int sumArray (int arr[], int size) {
     if (size <= 0) return 0;
-
     int sum = 0;
 
     for (int i = 0; i < size; i++) {
@@ -51,10 +50,30 @@ int sumArray (int arr[], int size) {
 //     Hint: cast to double before dividing.
 //     Defensive: size <= 0 → return 0.0
 
+  double averageArray (int arr[], int size) {
+    if (size <= 0) return 0.0;
+
+    double total = sumArray(arr, size);
+    return total / size;
+  }
 
 // 1c. maxValue — return the largest element.
 //     Example: {3, 9, 1} → 9
 //     Defensive: size < 1 → return -1 (sentinel)
+int maxValue (int arr[], int size) {
+    if (size < 1) return -1; 
+    //assumes the first value input is the highest
+    int max = arr[0];
+
+    for (int i = 1; i < size; i++ ) {
+        //if the i is new high update max
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    return max;
+}
 
 
 // 1d. minValue — return the smallest element.
@@ -137,15 +156,15 @@ int sumArray (int arr[], int size) {
 void runTests() {
     int a[] = {3, -1, 4, -1, 5};
     int b[] = {10, 20, 30};
-    int e[] = {1, 2, 2, 2, 3};
+  //  int e[] = {1, 2, 2, 2, 3};
 
     // Part 1
      assert(sumArray(a, 5) == 10);
      assert(sumArray(b, 3) == 60);
-    // assert(averageArray(b, 3) == 20.0);
-    // assert(maxValue(a, 5) == 5);
-    // assert(minValue(a, 5) == -1);
-    // assert(maxIndex(a, 5) == 4);
+     assert(averageArray(b, 3) == 20.0);
+     assert(maxValue(a, 5) == 5);
+   //  assert(minValue(a, 5) == -1);
+  //   assert(maxIndex(a, 5) == 4);
 
     // Part 2
     // assert(contains(a, 5, 4) == true);
@@ -171,7 +190,7 @@ void runTests() {
 
     // Defensive
      assert(sumArray(b, 0) == 0);
-    // assert(averageArray(b, 0) == 0.0);
+     assert(averageArray(b, 0) == 0.0);
     // assert(maxValue(b, 0) == -1);
     // assert(contains(b, 0, 10) == false);
 }
