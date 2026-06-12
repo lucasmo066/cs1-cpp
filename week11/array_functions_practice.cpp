@@ -153,8 +153,7 @@ int countValue(int arr[], int size, int inputValue) {
 //     Defensive: size <= 0 → return immediately
 void fillArray (int arr[], int size, int fill) {
     if (size <= 0) return;
-
-
+ 
     for(int i = 0; i < size; i++) {
         arr[i] = fill;
     }
@@ -164,7 +163,12 @@ void fillArray (int arr[], int size, int fill) {
 //     Example: {1, 2, 3, 4} → {4, 3, 2, 1}
 //     Hint: swap from both ends moving inward (temp variable).
 //     Defensive: size <= 1 → return
+void reverseInPlace(int arr[], int size) {
+    if (size <= 1) return;
 
+    
+
+}
 
 // ------------------------------------------------------------
 // PART 3 — Functions calling functions
