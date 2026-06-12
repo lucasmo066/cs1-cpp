@@ -151,7 +151,14 @@ int countValue(int arr[], int size, int inputValue) {
 // 2c. fillArray (void) — set every element to value.
 //     After fillArray(arr, 5, 0), all five slots should be 0.
 //     Defensive: size <= 0 → return immediately
+void fillArray (int arr[], int size, int fill) {
+    if (size <= 0) return;
 
+
+    for(int i = 0; i < size; i++) {
+        arr[i] = fill;
+    }
+}
 
 // 2d. reverseInPlace (void) — reverse order of elements.
 //     Example: {1, 2, 3, 4} → {4, 3, 2, 1}
@@ -219,9 +226,9 @@ void runTests() {
      assert(contains(a, 5, 4) == true);
      assert(contains(a, 5, 99) == false);
      assert(countValue(e, 5, 2) == 3);
-    // int fillTest[] = {1, 2, 3};
-    // fillArray(fillTest, 3, 0);
-    // assert(fillTest[0] == 0 && fillTest[1] == 0 && fillTest[2] == 0);
+     int fillTest[] = {1, 2, 3};
+     fillArray(fillTest, 3, 0);
+     assert(fillTest[0] == 0 && fillTest[1] == 0 && fillTest[2] == 0);
     // int revTest[] = {1, 2, 3, 4};
     // reverseInPlace(revTest, 4);
     // assert(revTest[0] == 4 && revTest[1] == 3 && revTest[2] == 2 && revTest[3] == 1);
