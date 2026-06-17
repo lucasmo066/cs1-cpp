@@ -166,8 +166,15 @@ void fillArray (int arr[], int size, int fill) {
 void reverseInPlace(int arr[], int size) {
     if (size <= 1) return;
 
-    
-
+    int left = 0;
+    int right = size - 1;
+    while (left < right) {
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+        left++;
+        right--;
+    }
 }
 
 // ------------------------------------------------------------
@@ -177,6 +184,17 @@ void reverseInPlace(int arr[], int size) {
 
 // 3a. printArray (void) — print elements space-separated, then endl.
 //     Example: {10, 20, 30} prints: 10 20 30
+void printArray(int arr[], int size) {
+    if (size <= 0) return;
+
+    for (int i = 0; i < size; i++) {
+        cout << arr[i];
+        if (i < size - 1) {
+            cout << ' ';
+        }
+    }
+    cout << endl;
+}
 
 
 // 3b. printStats (void) — print Sum, Min, Max, Average.
@@ -233,9 +251,9 @@ void runTests() {
      int fillTest[] = {1, 2, 3};
      fillArray(fillTest, 3, 0);
      assert(fillTest[0] == 0 && fillTest[1] == 0 && fillTest[2] == 0);
-    // int revTest[] = {1, 2, 3, 4};
-    // reverseInPlace(revTest, 4);
-    // assert(revTest[0] == 4 && revTest[1] == 3 && revTest[2] == 2 && revTest[3] == 1);
+     int revTest[] = {1, 2, 3, 4};
+     reverseInPlace(revTest, 4);
+     assert(revTest[0] == 4 && revTest[1] == 3 && revTest[2] == 2 && revTest[3] == 1);
 
     // Part 3
     // int scale[] = {2, 4, 6};
