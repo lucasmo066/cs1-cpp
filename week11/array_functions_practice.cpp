@@ -451,13 +451,115 @@ void runPracticeScenarios() {
     assert(arraysEqual(original, snapshot, 6) == true);
 }
 
+// ------------------------------------------------------------
+// BONUS UTILITIES — extra array drills beyond the worksheet
+// ------------------------------------------------------------
+
+int countBelowValue(int arr[], int size, int threshold) {
+    if (size <= 0) return 0;
+    int count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] < threshold) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int countInRange(int arr[], int size, int low, int high) {
+    if (size <= 0) return 0;
+    int count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] >= low && arr[i] <= high) {
+            count++;
+        }
+    }
+    return count;
+}
+
+void clampArray(int arr[], int size, int low, int high) {
+    if (size <= 0) return;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] < low) {
+            arr[i] = low;
+        } else if (arr[i] > high) {
+            arr[i] = high;
+        }
+    }
+}
+
+bool isSortedAscending(int arr[], int size) {
+    if (size <= 1) return true;
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < arr[i - 1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void shiftLeft(int arr[], int size) {
+    if (size <= 1) return;
+    for (int i = 0; i < size - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    arr[size - 1] = 0;
+}
+
+void runBonusTests() {
+    int below[] = {3, 9, 1, 15, 2};
+    assert(countBelowValue(below, 5, 5) == 3);
+    assert(countInRange(below, 5, 3, 10) == 2);
+
+    int clamped[] = {-5, 10, 50, 200};
+    clampArray(clamped, 4, 0, 100);
+    assert(clamped[0] == 0 && clamped[1] == 10 && clamped[3] == 100);
+
+    int sorted[] = {1, 2, 3, 4, 5};
+    int messy[] = {1, 3, 2, 4};
+    assert(isSortedAscending(sorted, 5) == true);
+    assert(isSortedAscending(messy, 4) == false);
+
+    int shift[] = {10, 20, 30, 40};
+    shiftLeft(shift, 4);
+    assert(shift[0] == 20 && shift[1] == 30 && shift[2] == 40 && shift[3] == 0);
+}
+
+void runBonusDemo() {
+    cout << endl << "=== Bonus utilities demo ===" << endl;
+
+    int temps[] = {-3, 14, 22, 37, 41, 18, 5};
+    cout << "Temperatures: ";
+    printArray(temps, 7);
+    cout << "Readings in comfort zone (10-30): "
+         << countInRange(temps, 7, 10, 30) << endl;
+    cout << "Readings below 10: " << countBelowValue(temps, 7, 10) << endl;
+
+    clampArray(temps, 7, 0, 35);
+    cout << "After clamp (0-35): ";
+    printArray(temps, 7);
+
+    int queue[] = {100, 200, 300, 400, 500};
+    cout << endl << "Queue before shift: ";
+    printArray(queue, 5);
+    shiftLeft(queue, 5);
+    cout << "Queue after shiftLeft: ";
+    printArray(queue, 5);
+
+    int ordered[] = {2, 4, 6, 8};
+    cout << "Is ordered ascending? "
+         << (isSortedAscending(ordered, 4) ? "yes" : "no") << endl;
+}
+
 int main() {
     runTests();
     runExtendedTests();
+    runBonusTests();
     cout << "All tests passed." << endl;
 
     runWorksheetDemo();
     runPracticeScenarios();
+    runBonusDemo();
 
     cout << endl << "Worksheet complete — Parts 1 through 4 finished." << endl;
     return 0;

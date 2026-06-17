@@ -199,7 +199,7 @@ void runCoreTests() {
 
 void runBonusTests() {
     int data[] = {5, 50, 150, -3, 8};
-    assert(countBelowValue(data, 5, 10) == 2);
+    assert(countBelowValue(data, 5, 10) == 3);
 
     int clampTest[] = {1, 50, 200};
     clampArray(clampTest, 3, 10, 100);
