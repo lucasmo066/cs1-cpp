@@ -200,12 +200,33 @@ void printArray(int arr[], int size) {
 // 3b. printStats (void) — print Sum, Min, Max, Average.
 //     Call sumArray, minValue, maxValue, averageArray.
 //     Defensive: size <= 0 → print error and return.
+void printStats(int arr[], int size) {
+    if (size <= 0) {
+        cout << "Error: cannot print stats for empty array." << endl;
+        return;
+    }
+
+    cout << "Sum: " << sumArray(arr, size) << endl;
+    cout << "Min: " << minValue(arr, size) << endl;
+    cout << "Max: " << maxValue(arr, size) << endl;
+    cout << "Average: " << averageArray(arr, size) << endl;
+}
 
 
 // 3c. scaleToMax100 (void) — scale arr in place so largest becomes 100.
 //     Example: {2, 4, 6} → {33, 67, 100} (integer math)
 //     Steps: find max → if max == 0 do nothing → arr[i] = (arr[i] * 100) / max
 //     Defensive: size <= 0 → return
+void scaleToMax100(int arr[], int size) {
+    if (size <= 0) return;
+
+    int max = maxValue(arr, size);
+    if (max == 0) return;
+
+    for (int i = 0; i < size; i++) {
+        arr[i] = (arr[i] * 100) / max;
+    }
+}
 
 
 // ------------------------------------------------------------
@@ -214,16 +235,45 @@ void printArray(int arr[], int size) {
 
 // 4a. copyArray (void) — copy size elements from src into dest.
 //     Defensive: size <= 0 → return
+void copyArray(int dest[], int src[], int size) {
+    if (size <= 0) return;
+
+    for (int i = 0; i < size; i++) {
+        dest[i] = src[i];
+    }
+}
 
 
 // 4b. arraysEqual — return true if same elements in same order.
 //     Defensive: size <= 0 → return true
+bool arraysEqual(int arr1[], int arr2[], int size) {
+    if (size <= 0) return true;
+
+    for (int i = 0; i < size; i++) {
+        if (arr1[i] != arr2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
 
 
 // 4c. countAboveAverage — return how many elements are strictly
 //     greater than the average. Call averageArray once, then loop.
 //     Example: {10, 20, 30} → avg 20 → only 30 → return 1
 //     Defensive: size <= 0 → return 0
+int countAboveAverage(int arr[], int size) {
+    if (size <= 0) return 0;
+
+    double avg = averageArray(arr, size);
+    int count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] > avg) {
+            count++;
+        }
+    }
+    return count;
+}
 
 
 // ------------------------------------------------------------
@@ -256,25 +306,159 @@ void runTests() {
      assert(revTest[0] == 4 && revTest[1] == 3 && revTest[2] == 2 && revTest[3] == 1);
 
     // Part 3
-    // int scale[] = {2, 4, 6};
-    // scaleToMax100(scale, 3);
-    // assert(scale[2] == 100);
+     int scale[] = {2, 4, 6};
+     scaleToMax100(scale, 3);
+     assert(scale[0] == 33 && scale[1] == 66 && scale[2] == 100);
 
     // Part 4
-    // int dest[3];
-    // copyArray(dest, b, 3);
-    // assert(arraysEqual(dest, b, 3) == true);
-    // assert(countAboveAverage(b, 3) == 1);
+     int dest[3];
+     copyArray(dest, b, 3);
+     assert(arraysEqual(dest, b, 3) == true);
+     assert(countAboveAverage(b, 3) == 1);
 
     // Defensive
      assert(sumArray(b, 0) == 0);
      assert(averageArray(b, 0) == 0.0);
      assert(maxValue(b, 0) == -1);
      assert(contains(b, 0, 10) == false);
+     assert(countValue(b, 0, 10) == 0);
+     assert(arraysEqual(b, b, 0) == true);
+     assert(countAboveAverage(b, 0) == 0);
+}
+
+// ------------------------------------------------------------
+// EXTENDED PRACTICE — extra demos and edge-case tests
+// ------------------------------------------------------------
+
+void runExtendedTests() {
+    int negatives[] = {-5, -2, -10, -2};
+    assert(maxValue(negatives, 4) == -2);
+    assert(minValue(negatives, 4) == -10);
+    assert(maxIndex(negatives, 4) == 1);
+    assert(sumArray(negatives, 4) == -19);
+
+    int dupes[] = {3, 9, 1, 9};
+    assert(maxIndex(dupes, 4) == 1);
+    assert(contains(dupes, 4, 9) == true);
+    assert(countValue(dupes, 4, 9) == 2);
+
+    int single[] = {42};
+    assert(sumArray(single, 1) == 42);
+    assert(averageArray(single, 1) == 42.0);
+    assert(maxValue(single, 1) == 42);
+    assert(minValue(single, 1) == 42);
+    assert(maxIndex(single, 1) == 0);
+
+    int zeros[] = {0, 0, 0};
+    scaleToMax100(zeros, 3);
+    assert(zeros[0] == 0 && zeros[1] == 0 && zeros[2] == 0);
+
+    int copySrc[] = {7, 8, 9};
+    int copyDest[3] = {0, 0, 0};
+    copyArray(copyDest, copySrc, 3);
+    assert(arraysEqual(copyDest, copySrc, 3) == true);
+
+    int notEqualA[] = {1, 2, 3};
+    int notEqualB[] = {1, 2, 4};
+    assert(arraysEqual(notEqualA, notEqualB, 3) == false);
+
+    int aboveAvg[] = {10, 20, 30, 40};
+    assert(countAboveAverage(aboveAvg, 4) == 2);
+
+    int palindrome[] = {1, 2, 3, 2, 1};
+    reverseInPlace(palindrome, 5);
+    assert(palindrome[0] == 1 && palindrome[2] == 3 && palindrome[4] == 1);
+
+    int fillLarge[] = {5, 5, 5, 5, 5};
+    fillArray(fillLarge, 5, 99);
+    assert(fillLarge[0] == 99 && fillLarge[4] == 99);
+}
+
+void runWorksheetDemo() {
+    cout << endl << "=== Array Functions Demo ===" << endl;
+
+    int sample[] = {12, 45, 7, 45, 19};
+    int sampleSize = 5;
+
+    cout << "Sample array: ";
+    printArray(sample, sampleSize);
+
+    cout << endl << "Stats:" << endl;
+    printStats(sample, sampleSize);
+
+    cout << endl << "Search results:" << endl;
+    cout << "Contains 45? " << (contains(sample, sampleSize, 45) ? "yes" : "no") << endl;
+    cout << "Contains 100? " << (contains(sample, sampleSize, 100) ? "yes" : "no") << endl;
+    cout << "Count of 45: " << countValue(sample, sampleSize, 45) << endl;
+    cout << "Count above average: " << countAboveAverage(sample, sampleSize) << endl;
+    cout << "Max index: " << maxIndex(sample, sampleSize) << endl;
+
+    int scaled[] = {2, 4, 6, 8};
+    cout << endl << "Before scale: ";
+    printArray(scaled, 4);
+    scaleToMax100(scaled, 4);
+    cout << "After scaleToMax100: ";
+    printArray(scaled, 4);
+
+    int reversed[] = {10, 20, 30};
+    cout << endl << "Before reverse: ";
+    printArray(reversed, 3);
+    reverseInPlace(reversed, 3);
+    cout << "After reverseInPlace: ";
+    printArray(reversed, 3);
+
+    int backup[3];
+    copyArray(backup, reversed, 3);
+    cout << endl << "Copied array: ";
+    printArray(backup, 3);
+    cout << "Arrays equal after copy? "
+         << (arraysEqual(backup, reversed, 3) ? "yes" : "no") << endl;
+
+    cout << endl << "Defensive checks:" << endl;
+    printStats(sample, 0);
+    cout << "minValue(empty): " << minValue(sample, 0) << endl;
+    cout << "contains(empty, 12): " << (contains(sample, 0, 12) ? "yes" : "no") << endl;
+}
+
+void runPracticeScenarios() {
+    // Scenario 1: grade curve style scaling
+    int grades[] = {72, 85, 91, 68, 95};
+    int gradeCount = 5;
+    cout << endl << "--- Scenario: grade scaling ---" << endl;
+    printArray(grades, gradeCount);
+    scaleToMax100(grades, gradeCount);
+    printArray(grades, gradeCount);
+
+    // Scenario 2: duplicate detection
+    int votes[] = {1, 2, 1, 3, 1, 2, 1};
+    int voteCount = 7;
+    cout << endl << "--- Scenario: vote counting ---" << endl;
+    cout << "Votes for candidate 1: " << countValue(votes, voteCount, 1) << endl;
+    cout << "Votes for candidate 2: " << countValue(votes, voteCount, 2) << endl;
+    cout << "Votes for candidate 3: " << countValue(votes, voteCount, 3) << endl;
+
+    // Scenario 3: snapshot and restore with copyArray
+    int original[] = {4, 8, 15, 16, 23, 42};
+    int snapshot[6];
+    copyArray(snapshot, original, 6);
+    reverseInPlace(original, 6);
+    cout << endl << "--- Scenario: snapshot restore ---" << endl;
+    cout << "Reversed (mutated): ";
+    printArray(original, 6);
+    copyArray(original, snapshot, 6);
+    cout << "Restored from snapshot: ";
+    printArray(original, 6);
+    assert(arraysEqual(original, snapshot, 6) == true);
 }
 
 int main() {
     runTests();
+    runExtendedTests();
     cout << "All tests passed." << endl;
+
+    runWorksheetDemo();
+    runPracticeScenarios();
+
+    cout << endl << "Worksheet complete — Parts 1 through 4 finished." << endl;
     return 0;
 }
