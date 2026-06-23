@@ -25,7 +25,6 @@ using namespace std;
 //   ./array_functions_practice
 // ============================================================
 
-
 // ------------------------------------------------------------
 // PART 1 — Core array utilities
 // Each function takes int arr[] and int size.
@@ -75,7 +74,6 @@ int maxValue (int arr[], int size) {
     return max;
 }
 
-
 // 1d. minValue — return the smallest element.
 //     Defensive: size < 1 → return -1
 int minValue (int arr[], int size) {
@@ -92,7 +90,6 @@ int minValue (int arr[], int size) {
 
     return minimum;
 }
-
 
 // 1e. maxIndex — return the INDEX of the largest element.
 //     If max appears more than once, return the first.
@@ -190,7 +187,6 @@ void printArray(int arr[], int size) {
     cout << endl;
 }
 
-
 // 3b. printStats (void) — print Sum, Min, Max, Average.
 //     Call sumArray, minValue, maxValue, averageArray.
 //     Defensive: size <= 0 → print error and return.
@@ -206,20 +202,25 @@ void printStats(int arr[], int size) {
     cout << "Average: " << averageArray(arr, size) << endl;
 }
 
-
 // 3c. scaleToMax100 (void) — scale arr in place so largest becomes 100.
 //     Example: {2, 4, 6} → {33, 67, 100} (integer math)
 //     Steps: find max → if max == 0 do nothing → arr[i] = (arr[i] * 100) / max
 //     Defensive: size <= 0 → return
 void scaleToMax100(int arr[], int size) {
-    if () {
-        
+    if (size <= 0) return;
+
+    //find the max value
+    int maximumValue = maxValue(arr, size);
+
+    //if max == 0 do nothing hoe
+    if (maximumValue == 0) {
+        return;
     }
 
-    maxValue();
-
+    for(int i = 0; i < size; i++) {
+        arr[i] = (arr[i] * 100) / maximumValue;
+    }
 }
-
 
 // ------------------------------------------------------------
 // PART 4 — Copy and compare
@@ -227,7 +228,11 @@ void scaleToMax100(int arr[], int size) {
 
 // 4a. copyArray (void) — copy size elements from src into dest.
 //     Defensive: size <= 0 → return
+void copyArray(int arr[], int size) {
+    if (size <= 0) return;
 
+
+}
 
 // 4b. arraysEqual — return true if same elements in same order.
 //     Defensive: size <= 0 → return true
