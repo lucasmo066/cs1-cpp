@@ -1,3 +1,4 @@
+// logger.cpp — shared logging helpers for console output and program.log append.
 #include "logger.h"
 
 #include <ctime>
@@ -8,7 +9,7 @@ using namespace std;
 
 static const char* LOG_FILE = "program.log";
 
-// Convert LogLevel to the string shown in each log line.
+// Map each LogLevel to a fixed-width label for formatted log lines.
 static string levelToString(LogLevel level) {
     switch (level) {
         case LogLevel::DEBUG:    return "DEBUG";
