@@ -165,14 +165,13 @@ void fillArray (int arr[], int size, int fill) {
 //     Defensive: size <= 1 → return
 void reverseInPlace(int arr[], int size) {
     if (size <= 1) return;
-    
+
     for (int i = 0; i < size / 2; i++) {
         int temp = arr[i];
         arr[i] = arr[size - 1 - i];
         arr[size - 1 - i] = temp;
     }
 }
-
 
 // ------------------------------------------------------------
 // PART 3 — Functions calling functions
@@ -181,6 +180,16 @@ void reverseInPlace(int arr[], int size) {
 
 // 3a. printArray (void) — print elements space-separated, then endl.
 //     Example: {10, 20, 30} prints: 10 20 30
+void printArray(int arr[], int size) {
+    if (size <= 1) return;
+
+    for (int i = 0; i < size; i++) {
+        //every iteration print the arr[i]
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+}
 
 
 // 3b. printStats (void) — print Sum, Min, Max, Average.
