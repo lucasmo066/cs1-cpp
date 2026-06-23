@@ -228,9 +228,12 @@ void scaleToMax100(int arr[], int size) {
 
 // 4a. copyArray (void) — copy size elements from src into dest.
 //     Defensive: size <= 0 → return
-void copyArray(int arr[], int size) {
+void copyArray(int dest[], int src[], int size) {
     if (size <= 0) return;
 
+    for(int i = 0; i < size; i++) {
+        dest[i] = src[i];
+    }
 
 }
 
@@ -269,18 +272,18 @@ void runTests() {
      int fillTest[] = {1, 2, 3};
      fillArray(fillTest, 3, 0);
      assert(fillTest[0] == 0 && fillTest[1] == 0 && fillTest[2] == 0);
-    // int revTest[] = {1, 2, 3, 4};
-    // reverseInPlace(revTest, 4);
-    // assert(revTest[0] == 4 && revTest[1] == 3 && revTest[2] == 2 && revTest[3] == 1);
+     int revTest[] = {1, 2, 3, 4};
+     reverseInPlace(revTest, 4);
+     assert(revTest[0] == 4 && revTest[1] == 3 && revTest[2] == 2 && revTest[3] == 1);
 
     // Part 3
-    // int scale[] = {2, 4, 6};
-    // scaleToMax100(scale, 3);
-    // assert(scale[2] == 100);
+     int scale[] = {2, 4, 6};
+     scaleToMax100(scale, 3);
+     assert(scale[2] == 100);
 
     // Part 4
-    // int dest[3];
-    // copyArray(dest, b, 3);
+     int dest[3];
+     copyArray(dest, b, 3);
     // assert(arraysEqual(dest, b, 3) == true);
     // assert(countAboveAverage(b, 3) == 1);
 
