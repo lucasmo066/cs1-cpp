@@ -238,21 +238,35 @@ void copyArray(int dest[], int src[], int size) {
 
 // 4b. arraysEqual — return true if same elements in same order.
 //     Defensive: size <= 0 → return true
-bool arraysEqual ( int arr[], int size ) {
+bool arraysEqual ( int arr1[], int arr2[], int size ) {
     if ( size <= 0 ) return true;
-
+ 
     for( int i = 0; i < size; i++ ) {
-
+        if (arr1[i] != arr2[i]) {
+            return false;
+        } 
     }
 
-
-
+    return true;
 }
 
 // 4c. countAboveAverage — return how many elements are strictly
 //     greater than the average. Call averageArray once, then loop.
 //     Example: {10, 20, 30} → avg 20 → only 30 → return 1
 //     Defensive: size <= 0 → return 0
+int countAboveAverage(int arr[], int size) {
+    if ( size <= 0 ) return 0;
+    
+    double avg   = averageArray(arr, size);
+    int    count = 0;
+
+    for ( int i = 0; i < size; i++ ) {
+        if (arr[i] > avg) {
+            count++;
+        }
+    }
+    return count;
+}
 
 
 // ------------------------------------------------------------
