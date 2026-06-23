@@ -213,7 +213,7 @@ void printStats(int arr[], int size) {
 //     Defensive: size <= 0 → return
 void scaleToMax100(int arr[], int size) {
     if () {
-
+        
     }
 
     maxValue();
