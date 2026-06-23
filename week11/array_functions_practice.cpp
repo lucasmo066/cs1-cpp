@@ -181,26 +181,44 @@ void reverseInPlace(int arr[], int size) {
 // 3a. printArray (void) — print elements space-separated, then endl.
 //     Example: {10, 20, 30} prints: 10 20 30
 void printArray(int arr[], int size) {
-    if (size <= 1) return;
+    if (size <= 0) return;
 
     for (int i = 0; i < size; i++) {
         //every iteration print the arr[i]
         cout << arr[i] << " ";
     }
     cout << endl;
-
 }
 
 
 // 3b. printStats (void) — print Sum, Min, Max, Average.
 //     Call sumArray, minValue, maxValue, averageArray.
 //     Defensive: size <= 0 → print error and return.
+void printStats(int arr[], int size) {
+    if(size <= 0) {
+        cout << "Error: Empty Array" << endl;
+        return;
+    };
+
+    cout << "Sum: " << sumArray(arr, size) << endl;
+    cout << "Min: " << minValue(arr, size) << endl;
+    cout << "Max: " << maxValue(arr, size) << endl;
+    cout << "Average: " << averageArray(arr, size) << endl;
+}
 
 
 // 3c. scaleToMax100 (void) — scale arr in place so largest becomes 100.
 //     Example: {2, 4, 6} → {33, 67, 100} (integer math)
 //     Steps: find max → if max == 0 do nothing → arr[i] = (arr[i] * 100) / max
 //     Defensive: size <= 0 → return
+void scaleToMax100(int arr[], int size) {
+    if () {
+
+    }
+
+    maxValue();
+
+}
 
 
 // ------------------------------------------------------------
