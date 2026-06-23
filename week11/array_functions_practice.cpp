@@ -306,8 +306,8 @@ void runTests() {
     // Part 4
      int dest[3];
      copyArray(dest, b, 3);
-    // assert(arraysEqual(dest, b, 3) == true);
-    // assert(countAboveAverage(b, 3) == 1);
+     assert(arraysEqual(dest, b, 3) == true);
+    assert(countAboveAverage(b, 3) == 1);
 
     // Defensive
      assert(sumArray(b, 0) == 0);
