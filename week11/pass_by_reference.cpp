@@ -50,12 +50,23 @@ void doubleValue(int& n) {
 //    Example: clampValue(n, 0, 100) — keeps n in [0, 100].
 //    Why this matters: you will write this exact pattern for parameter
 //    validation in OOP (keeping a health bar between 0 and maxHealth, etc.)
-
+void clampValue(int& n, int lo, int hi) {
+    if (n < lo) {
+        n = lo;
+    } else if (n > hi) {
+        n = hi;
+    }
+}
 
 // 4. Write void sortTwo(int& a, int& b)
 //    Leave a <= b — swap if needed.
 //    After: int x=9, y=3; sortTwo(x,y); → x==3, y==9
+void sortTwo(int& a, int& b) {
+    if (b <= a) {
+        swap(a,b);
+    }
 
+}
 
 // ------------------------------------------------------------
 // PART 2 — Multiple outputs from one function
