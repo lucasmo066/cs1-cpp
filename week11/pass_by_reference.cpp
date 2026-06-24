@@ -41,7 +41,9 @@ void swap(int& a, int& b) {
 // 2. Write void doubleValue(int& n)
 //    Multiply the caller's variable by 2 in place.
 //    After: int x=5; doubleValue(x); → x==10
-
+void doubleValue(int& n) {
+    n *= 2;
+}
 
 // 3. Write void clampValue(int& n, int lo, int hi)
 //    If n < lo set it to lo; if n > hi set it to hi; else leave it.
@@ -153,13 +155,13 @@ void swap(int& a, int& b) {
 // PART 6 — Testing
 // Write void runTests() — uncomment one block at a time.
 //
-//   int x = 3, y = 7;
-//   swap(x, y);
-//   assert(x == 7 && y == 3);
-//
-//   int n = 5;
-//   doubleValue(n);
-//   assert(n == 10);
+  int x = 3, y = 7;
+   swap(x, y);
+  assert(x == 7 && y == 3);
+
+   int n = 5;
+   doubleValue(n);
+   assert(n == 10);
 //
 //   int c = 150;
 //   clampValue(c, 0, 100);
