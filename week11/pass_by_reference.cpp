@@ -32,7 +32,11 @@ using namespace std;
 //    Exchange two ints in the caller's scope.
 //    Hint: classic three-variable swap with a temp.
 //    After: int x=3, y=7; swap(x,y); → x==7, y==3
-
+void swap(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
 
 // 2. Write void doubleValue(int& n)
 //    Multiply the caller's variable by 2 in place.
