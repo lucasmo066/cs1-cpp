@@ -82,14 +82,43 @@ void findMinMax(int arr[], int size, int& minOut, int& maxOut) {
         return;
     }
 
+    minOut = arr[0];
+    maxOut = arr[0];
 
+    // loop over the elements of the array
+    for(int i = 1; i < size; i++) {
+        //at every iteration check if the arr[i] is the new minOut or maxOut
+        if (arr[i] < minOut) {
+            minOut = arr[i];
+        }
+        if (arr[i] > maxOut) {
+            maxOut = arr[i];
+        }
+    }
 }
 
 // 6. Write void splitEvenOdd(int arr[], int size, int& evenCount, int& oddCount)
 //    Count how many elements are even and how many are odd.
 //    Set both via reference — two outputs, one loop.
 //    Defensive: if size <= 0, set both to 0 and return.
+void splitEvenOdd (int arr[], int size, int& evenCount, int& oddCount) {
+    if (size <= 0) {
+        evenCount = 0;
+        oddCount  = 0;
+        return;
+    }
+    //initiate count
+    evenCount = 0;
+    oddCount  = 0;
 
+    for (int i = 0; i < size; i++) {
+        if (arr[i] % 2 == 0) {
+            evenCount++;
+        } else {
+            oddCount++;
+        }
+    }
+}
 
 // 7. Write void calcStats(int arr[], int size,
 //                         int& outMin, int& outMax,
@@ -101,6 +130,28 @@ void findMinMax(int arr[], int size, int& minOut, int& maxOut) {
 //    This is the OOP constructor pattern — object receives data,
 //    fills multiple internal fields in one call.
 
+void calcStats(int arr[], int size, int& outMin, int& outMax, double& outAvg) {
+    if (size < 1) {
+        cout << "error: Array empty" << endl;
+        return;
+    }
+    // One pass: seed from first element, then update min, max, and sum
+    outMin = arr[0];
+    outMax = arr[0];
+    int sum = arr[0];
+
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < outMin) {
+            outMin = arr[i];
+        }
+        if (arr[i] > outMax) {
+            outMax = arr[i];
+        }
+        sum += arr[i];
+    }
+    // Cast before divide so average is not integer truncation
+    outAvg = static_cast<double>(sum) / size;
+}
 
 // ------------------------------------------------------------
 // PART 3 — Reference + array size changes
@@ -113,6 +164,24 @@ void findMinMax(int arr[], int size, int& minOut, int& maxOut) {
 //    Defensive: if size <= 0, return false.
 //    Why int& size: the caller's size variable must shrink — pass by value
 //    would leave the caller's size untouched after the call.
+bool removeFirst (int arr[], int& size, int target) {
+    if (size <= 0) {
+        return false;
+    }
+
+
+    for(int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+         for (int j = i; j < size -1; j++) {
+                 arr[j] = arr[j + 1];
+           }
+           size--;
+           return true;    
+        }
+    }
+
+    return false;
+}
 
 
 // 9. Write bool insertAt(int arr[], int& size, int capacity,
@@ -172,35 +241,11 @@ void findMinMax(int arr[], int size, int& minOut, int& maxOut) {
 // PART 6 — Testing
 // Write void runTests() — uncomment one block at a time.
 //
-  int x = 3, y = 7;
-   swap(x, y);
-  assert(x == 7 && y == 3);
 
-   int n = 5;
-   doubleValue(n);
-   assert(n == 10);
+  
 
-  int c = 150;
-  clampValue(c, 0, 100);
-  assert(c == 100);
 
-   int a = 9, b = 3;
-   sortTwo(a, b);
-   assert(a == 3 && b == 9);
 
-   int data[] = {4, -2, 9, 1, 7};
-   int lo = 0, hi = 0;
-   findMinMax(data, 5, lo, hi);
-   assert(lo == -2 && hi == 9);
-   
-//   int ev = 0, od = 0;
-//   splitEvenOdd(data, 5, ev, od);
-//   assert(ev == 2 && od == 3);
-//
-//   int arr[] = {1, 2, 3};
-//   int sz = 3;
-//   assert(removeFirst(arr, sz, 2) == true);
-//   assert(sz == 2 && arr[0] == 1 && arr[1] == 3);
 //
 //   assert(isSorted(data, 5) == false);
 //   int sorted[] = {1, 3, 5, 7};
@@ -208,8 +253,35 @@ void findMinMax(int arr[], int size, int& minOut, int& maxOut) {
 // ------------------------------------------------------------
 
 void runTests() {
+    int x = 3, y = 7;
+    swap(x, y);
+    assert(x == 7 && y == 3);
 
+    int n = 5;
+    doubleValue(n);
+    assert(n == 10);
+ 
+   int c = 150;
+   clampValue(c, 0, 100);
+   assert(c == 100);
+ 
+    int a = 9, b = 3;
+    sortTwo(a, b);
+    assert(a == 3 && b == 9);
+ 
+    int data[] = {4, -2, 9, 1, 7};
+    int lo = 0, hi = 0;
+    findMinMax(data, 5, lo, hi);
+    assert(lo == -2 && hi == 9);
 
+    int ev = 0, od = 0;
+    splitEvenOdd(data, 5, ev, od);
+    assert(ev == 2 && od == 3);
+
+    int arr[] = {1, 2, 3};
+    int sz = 3;
+    assert(removeFirst(arr, sz, 2) == true);
+    assert(sz == 2 && arr[0] == 1 && arr[1] == 3);
 }
 
 int main() {
