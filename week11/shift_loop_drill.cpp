@@ -44,10 +44,6 @@ using namespace std;
 //   j = 2: arr[2] = arr[3]  →  arr = { ?, ?, ?, ? }
 //   after size--: size = ?
 //   final logical array (indices 0 .. size-1): { ?, ?, ? }
-j = 1: arr[1] = arr[2]  →  arr = {10, 30, 30, 40}
-j = 2: arr[2] = arr[3]  →  arr = {10, 30, 40, 40}
-after size--: size = 3
-final logical array (indices 0 .. size-1): {10, 30, 40}
 
 
 

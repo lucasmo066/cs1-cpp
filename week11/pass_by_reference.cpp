@@ -214,7 +214,20 @@ bool insertAt(int arr[], int& size, int capacity, int index, int value) {
 //     const string& label — no copy of the string, but cannot modify it.
 //     This is the pattern for every display/print function in OOP.
 //     Defensive: if size <= 0, print label + ": []"
-
+void printArrayInfo(const int arr[], int size, const string& label) {
+    cout << label << ": [";
+    if (size <= 0) {
+        cout << "]";
+        return;
+    }
+    for (int i = 0; i < size; i++) {
+        cout << arr[i];
+        if (i < size - 1) {
+            cout << ", ";
+        }
+    }
+    cout << "]";
+}
 
 // 11. Write bool isSorted(const int arr[], int size)
 //     Return true if arr is non-decreasing (each element >= previous).
