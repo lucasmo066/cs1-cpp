@@ -190,6 +190,7 @@ bool removeFirst (int arr[], int& size, int target) {
 //    Example: arr={10,20,30}, size=3, capacity=5, index=1, value=99
 //             → arr={10,99,20,30,?}, size=4
 //    Defensive: check size >= capacity AND index < 0 || index > size.
+
 bool insertAt(int arr[], int& size, int capacity, int index, int value) {
     if (size >= capacity || index < 0 || index > size) {
         return false;
@@ -198,7 +199,7 @@ bool insertAt(int arr[], int& size, int capacity, int index, int value) {
     for (int j = size - 1; j >= index; j--) {
         arr[j + 1] = arr[j];
     }
-
+    
     arr[index] = value;
     size++;
     return true;

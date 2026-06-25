@@ -1,0 +1,283 @@
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+// ============================================================
+// SHIFT LOOP DRILL — Week 11
+// Do AFTER pass_by_reference Part 3 (removeFirst, insertAt).
+//
+// Why this file exists:
+//   Part 3 combines THREE skills at once — find/guard, shift loop,
+//   and int& size. This drill pulls them apart, then puts them
+//   back together in harder steps.
+//
+// The two patterns (know these cold):
+//
+//   SHIFT LEFT (remove / close a gap) — loop FORWARD from the gap:
+//     for (int j = fromIndex; j < size - 1; j++) {
+//         arr[j] = arr[j + 1];
+//     }
+//     size--;   // caller or callee, depending on the function
+//
+//   SHIFT RIGHT (insert / open a gap) — loop BACKWARD from the end:
+//     for (int j = size - 1; j >= fromIndex; j--) {
+//         arr[j + 1] = arr[j];
+//     }
+//     arr[fromIndex] = value;
+//     size++;
+//
+// Compile:
+//   g++ -std=c++17 -Wall -o shift_loop_drill shift_loop_drill.cpp
+// ============================================================
+
+
+// ------------------------------------------------------------
+// PART 1 — Trace on paper (no code yet)
+// Draw the array after EACH loop iteration, then the final size.
+// ------------------------------------------------------------
+
+// Trace 1 — shift LEFT, found at index 1
+//   arr = {10, 20, 30, 40}, size = 4
+//   Remove the element at index 1 (value 20).
+//
+//   j = 1: arr[1] = arr[2]  →  arr = { ?, ?, ?, ? }
+//   j = 2: arr[2] = arr[3]  →  arr = { ?, ?, ?, ? }
+//   after size--: size = ?
+//   final logical array (indices 0 .. size-1): { ?, ?, ? }
+j = 1: arr[1] = arr[2]  →  arr = {10, 30, 30, 40}
+j = 2: arr[2] = arr[3]  →  arr = {10, 30, 40, 40}
+after size--: size = 3
+final logical array (indices 0 .. size-1): {10, 30, 40}
+
+
+
+// Trace 2 — shift LEFT at the FRONT (index 0)
+//   arr = {10, 20, 30}, size = 3
+//   Remove index 0.
+//
+//   j = 0: arr[0] = arr[1]  →  arr = { ?, ?, ? }
+//   j = 1: arr[1] = arr[2]  →  arr = { ?, ?, ? }
+//   after size--: size = ?
+//   final: { ?, ? }
+
+
+// Trace 3 — shift RIGHT, insert at index 1
+//   arr = {10, 20, 30}, size = 3, insert value 99 at index 1
+//
+//   j = 2: arr[3] = arr[2]  →  arr = { ?, ?, ?, ? }
+//   j = 1: arr[2] = arr[1]  →  arr = { ?, ?, ?, ? }
+//   arr[1] = 99               →  arr = { ?, ?, ?, ? }
+//   after size++: size = ?
+//   final: { ?, ?, ?, ? }
+
+
+// Trace 4 — shift RIGHT at the FRONT (index 0)
+//   arr = {10, 20, 30}, size = 3, insert value 99 at index 0
+//
+//   j = 2: arr[3] = arr[2]  →  ?
+//   j = 1: arr[2] = arr[1]  →  ?
+//   j = 0: arr[1] = arr[0]  →  ?
+//   arr[0] = 99               →  ?
+//   after size++: size = ?
+
+
+// Trace 5 — APPEND (insert at index == size)
+//   arr = {10, 20, 30}, size = 3, capacity = 5
+//   insert value 99 at index 3
+//
+//   Does the shift loop run at all? (yes / no)
+//   What does arr[3] become?
+//   size after insert = ?
+
+
+// Trace 6 — WRONG direction (understand the bug)
+//   arr = {10, 20, 30}, size = 3, insert 99 at index 1
+//   Someone writes a FORWARD shift-right loop:
+//     for (int j = 1; j < size; j++) { arr[j + 1] = arr[j]; }
+//
+//   j = 1: arr[2] = arr[1]  →  arr = { ?, ?, ? }
+//   j = 2: arr[3] = arr[2]  →  arr = { ?, ?, ? }
+//   What value was LOST? Why?
+
+
+// ------------------------------------------------------------
+// PART 2 — Shift loops ONLY (no size change, no search)
+// These isolate the inner loop from Part 3.
+// Caller is responsible for size-- / size++ / assigning value.
+// ------------------------------------------------------------
+
+// 2a. Write void shiftLeftFrom(int arr[], int size, int fromIndex)
+//     Starting at fromIndex, shift every element one slot LEFT.
+//     Same loop body as removeFirst's inner loop.
+//     Does NOT change size — caller decrements size after calling.
+//     Defensive: if fromIndex < 0 or fromIndex >= size, return immediately.
+//     Example: arr={10,20,30,40}, size=4, fromIndex=1
+//              → arr={10,30,40,40}  (size still 4 until caller fixes it)
+
+
+// 2b. Write void shiftRightFrom(int arr[], int size, int fromIndex)
+//     Starting at fromIndex, shift every element one slot RIGHT.
+//     Same loop body as insertAt's inner loop (before arr[index]=value).
+//     Does NOT insert a value or change size.
+//     Defensive: if fromIndex < 0 or fromIndex > size, return immediately.
+//     Example: arr={10,20,30}, size=3, fromIndex=1
+//              → arr={10,20,20,30}  (gap not filled yet; size still 3)
+
+
+// ------------------------------------------------------------
+// PART 3 — Known index (shift + size, no search)
+// You struggled separating "find target" from "shift loop" in removeFirst.
+// These give you the index directly so you practice shift + int& size.
+// ------------------------------------------------------------
+
+// 3a. Write bool removeAt(int arr[], int& size, int index)
+//     Remove the element at index: shift left, size--, return true.
+//     Defensive: if size <= 0 or index < 0 or index >= size, return false.
+//     Hint: reuse shiftLeftFrom, or write the loop inline.
+//     Example: arr={10,20,30}, size=3, index=0 → arr={20,30,?}, size=2
+
+
+// 3b. Write bool appendValue(int arr[], int& size, int capacity, int value)
+//     Insert value at the end (index == size).
+//     Defensive: if size >= capacity, return false.
+//     Example: arr={10,20}, size=2, capacity=5, value=30
+//              → arr={10,20,30,?,?}, size=3
+//     Note: the shift loop should NOT run — good edge case to understand.
+
+
+// 3c. Write bool prependValue(int arr[], int& size, int capacity, int value)
+//     Insert value at index 0 (front of the array).
+//     Defensive: if size >= capacity, return false.
+//     Example: arr={20,30}, size=2, capacity=5, value=10
+//              → arr={10,20,30,?,?}, size=3
+//     This is the hardest shift-right case — trace it before coding.
+
+
+// ------------------------------------------------------------
+// PART 4 — Full Part 3 replay (find + shift + size)
+// Same specs as pass_by_reference #8 and #9.
+// Try writing these WITHOUT peeking at pass_by_reference.cpp first.
+// ------------------------------------------------------------
+
+// 4a. Write bool removeFirst(int arr[], int& size, int target)
+//     Find the FIRST occurrence of target, shift left, size--, return true.
+//     Not found → return false, size unchanged.
+//     Defensive: size <= 0 → return false.
+//     Example: arr={5,5,5}, size=3, target=5 → arr={5,5,?}, size=2
+//              (only the FIRST 5 is removed)
+
+
+// 4b. Write bool insertAt(int arr[], int& size, int capacity,
+//                         int index, int value)
+//     Shift right at index, insert value, size++, return true.
+//     Defensive: size >= capacity OR index < 0 OR index > size → false.
+//     Example: arr={10,20,30}, size=3, capacity=5, index=1, value=99
+//              → arr={10,99,20,30,?}, size=4
+
+
+// ------------------------------------------------------------
+// PART 5 — Harder: multiple operations
+// ------------------------------------------------------------
+
+// 5a. Write int removeAll(int arr[], int& size, int target)
+//     Remove EVERY occurrence of target (not just the first).
+//     Return how many elements were removed.
+//     Defensive: if size <= 0, return 0.
+//     Hint: when you remove at index i and shift left, the NEXT
+//     element slides INTO index i — so do NOT always i++.
+//     Example: arr={5,5,10,5}, size=4, target=5 → arr={10,?}, size=1, return 3
+//
+//     Trace before coding:
+//       start: {5, 5, 10, 5}, i=0, find 5 at 0, remove → {5, 10, 5}, size=3
+//       now i=0 again (new 5 slid into slot 0) ...
+
+
+// 5b. Write bool insertSorted(int arr[], int& size, int capacity, int value)
+//     Insert value so the array stays in non-decreasing order.
+//     Find the correct index first (first position where value fits),
+//     then shift right and insert.
+//     Defensive: size >= capacity → return false.
+//     Example: arr={10,20,40}, size=3, capacity=6, value=25
+//              → arr={10,20,25,40,?,?}, size=4
+//     Example: arr={10,20,30}, size=3, capacity=6, value=5
+//              → arr={5,10,20,30,?,?}, size=4
+
+
+// ------------------------------------------------------------
+// PART 6 — Optional helper (makes manual testing easier)
+// ------------------------------------------------------------
+
+// 6. Write void printArray(const int arr[], int size, const string& label)
+//    Print:  label: [e1, e2, e3]
+//    If size <= 0, print label: []
+//    Use in main() to eyeball your shifts before you trust asserts.
+
+
+// ------------------------------------------------------------
+// PART 7 — Testing
+// Uncomment one block at a time in runTests().
+// ------------------------------------------------------------
+
+void runTests() {
+    // --- Part 2 ---
+    // int a[] = {10, 20, 30, 40};
+    // shiftLeftFrom(a, 4, 1);
+    // assert(a[0] == 10 && a[1] == 30 && a[2] == 40 && a[3] == 40);
+
+    // int b[] = {10, 20, 30};
+    // shiftRightFrom(b, 3, 1);
+    // assert(b[0] == 10 && b[1] == 20 && b[2] == 20 && b[3] == 30);
+
+    // --- Part 3 ---
+    // int c[] = {10, 20, 30};
+    // int sz = 3;
+    // assert(removeAt(c, sz, 0) == true);
+    // assert(sz == 2 && c[0] == 20 && c[1] == 30);
+
+    // int d[5] = {10, 20};
+    // sz = 2;
+    // assert(appendValue(d, sz, 5, 30) == true);
+    // assert(sz == 3 && d[2] == 30);
+
+    // int e[5] = {20, 30};
+    // sz = 2;
+    // assert(prependValue(e, sz, 5, 10) == true);
+    // assert(sz == 3 && e[0] == 10 && e[1] == 20 && e[2] == 30);
+
+    // --- Part 4 ---
+    // int f[] = {5, 5, 5};
+    // sz = 3;
+    // assert(removeFirst(f, sz, 5) == true);
+    // assert(sz == 2 && f[0] == 5 && f[1] == 5);
+
+    // int g[5] = {10, 20, 30};
+    // sz = 3;
+    // assert(insertAt(g, sz, 5, 1, 99) == true);
+    // assert(sz == 4 && g[0] == 10 && g[1] == 99 && g[2] == 20 && g[3] == 30);
+
+    // --- Part 5 ---
+    // int h[] = {5, 5, 10, 5};
+    // sz = 4;
+    // assert(removeAll(h, sz, 5) == 3);
+    // assert(sz == 1 && h[0] == 10);
+
+    // int i[6] = {10, 20, 40};
+    // sz = 3;
+    // assert(insertSorted(i, sz, 6, 25) == true);
+    // assert(sz == 4 && i[0] == 10 && i[1] == 20 && i[2] == 25 && i[3] == 40);
+}
+
+int main() {
+    // Start with Part 1 traces on paper, then code Part 2.
+    // Use printArray in main() for quick visual checks:
+    //
+    //   int arr[] = {10, 20, 30};
+    //   int sz = 3;
+    //   printArray(arr, sz, "before");
+    //   removeAt(arr, sz, 1);
+    //   printArray(arr, sz, "after");
+
+    runTests();
+    cout << "All tests passed." << endl;
+    return 0;
+}
