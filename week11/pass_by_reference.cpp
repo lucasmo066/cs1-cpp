@@ -169,7 +169,6 @@ bool removeFirst (int arr[], int& size, int target) {
         return false;
     }
 
-
     for(int i = 0; i < size; i++) {
         if (arr[i] == target) {
          for (int j = i; j < size -1; j++) {
@@ -183,7 +182,6 @@ bool removeFirst (int arr[], int& size, int target) {
     return false;
 }
 
-
 // 9. Write bool insertAt(int arr[], int& size, int capacity,
 //                        int index, int value)
 //    Shift elements right from index onward, insert value at index,
@@ -192,8 +190,19 @@ bool removeFirst (int arr[], int& size, int target) {
 //    Example: arr={10,20,30}, size=3, capacity=5, index=1, value=99
 //             → arr={10,99,20,30,?}, size=4
 //    Defensive: check size >= capacity AND index < 0 || index > size.
+bool insertAt(int arr[], int& size, int capacity, int index, int value) {
+    if (size >= capacity || index < 0 || index > size) {
+        return false;
+    }
 
+    for (int j = size - 1; j >= index; j--) {
+        arr[j + 1] = arr[j];
+    }
 
+    arr[index] = value;
+    size++;
+    return true;
+}
 // ------------------------------------------------------------
 // PART 4 — const reference (read-only, no copy)
 // ------------------------------------------------------------
@@ -237,21 +246,6 @@ bool removeFirst (int arr[], int& size, int target) {
 // Answer 13:
 
 
-// ------------------------------------------------------------
-// PART 6 — Testing
-// Write void runTests() — uncomment one block at a time.
-//
-
-  
-
-
-
-//
-//   assert(isSorted(data, 5) == false);
-//   int sorted[] = {1, 3, 5, 7};
-//   assert(isSorted(sorted, 4) == true);
-// ------------------------------------------------------------
-
 void runTests() {
     int x = 3, y = 7;
     swap(x, y);
@@ -282,6 +276,10 @@ void runTests() {
     int sz = 3;
     assert(removeFirst(arr, sz, 2) == true);
     assert(sz == 2 && arr[0] == 1 && arr[1] == 3);
+
+    //   assert(isSorted(data, 5) == false);
+    //   int sorted[] = {1, 3, 5, 7};
+    //   assert(isSorted(sorted, 4) == true);
 }
 
 int main() {
