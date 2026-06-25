@@ -65,7 +65,6 @@ void sortTwo(int& a, int& b) {
     if (b <= a) {
         swap(a,b);
     }
-
 }
 
 // ------------------------------------------------------------
@@ -77,7 +76,14 @@ void sortTwo(int& a, int& b) {
 //    Set minOut and maxOut to the min and max in one pass.
 //    Defensive: if size < 1, print an error and return.
 //    Note: one pass over the array is enough — update both in the same loop.
+void findMinMax(int arr[], int size, int& minOut, int& maxOut) {
+    if (size < 1) {
+        cout << "Error: array is empty" << endl;
+        return;
+    }
 
+
+}
 
 // 6. Write void splitEvenOdd(int arr[], int size, int& evenCount, int& oddCount)
 //    Count how many elements are even and how many are odd.
@@ -173,20 +179,20 @@ void sortTwo(int& a, int& b) {
    int n = 5;
    doubleValue(n);
    assert(n == 10);
-//
-//   int c = 150;
-//   clampValue(c, 0, 100);
-//   assert(c == 100);
-//
-//   int a = 9, b = 3;
-//   sortTwo(a, b);
-//   assert(a == 3 && b == 9);
-//
-//   int data[] = {4, -2, 9, 1, 7};
-//   int lo = 0, hi = 0;
-//   findMinMax(data, 5, lo, hi);
-//   assert(lo == -2 && hi == 9);
-//
+
+  int c = 150;
+  clampValue(c, 0, 100);
+  assert(c == 100);
+
+   int a = 9, b = 3;
+   sortTwo(a, b);
+   assert(a == 3 && b == 9);
+
+   int data[] = {4, -2, 9, 1, 7};
+   int lo = 0, hi = 0;
+   findMinMax(data, 5, lo, hi);
+   assert(lo == -2 && hi == 9);
+   
 //   int ev = 0, od = 0;
 //   splitEvenOdd(data, 5, ev, od);
 //   assert(ev == 2 && od == 3);
@@ -202,6 +208,7 @@ void sortTwo(int& a, int& b) {
 // ------------------------------------------------------------
 
 void runTests() {
+
 
 }
 
