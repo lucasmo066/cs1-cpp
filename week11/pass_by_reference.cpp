@@ -234,7 +234,19 @@ void printArrayInfo(const int arr[], int size, const string& label) {
 //     const because we are only reading — should never modify.
 //     Example: {1,2,2,5} → true    {1,3,2,5} → false
 //     Defensive: size <= 1 → return true (0 or 1 element is trivially sorted)
+bool isSorted(const int arr[], int size) {
+    if (size <= 1) {
+        return true;
+    }
 
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < arr[i - 1]) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 // ------------------------------------------------------------
 // PART 5 — Think-about (no code required, write answer in comments)
@@ -291,9 +303,9 @@ void runTests() {
     assert(removeFirst(arr, sz, 2) == true);
     assert(sz == 2 && arr[0] == 1 && arr[1] == 3);
 
-    //   assert(isSorted(data, 5) == false);
-    //   int sorted[] = {1, 3, 5, 7};
-    //   assert(isSorted(sorted, 4) == true);
+    assert(isSorted(data, 5) == false);
+    int sorted[] = {1, 3, 5, 7};
+    assert(isSorted(sorted, 4) == true);
 }
 
 int main() {
