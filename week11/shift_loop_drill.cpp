@@ -202,6 +202,19 @@ bool prependValue(int arr[], int& size, int capacity, int value) {
 //     Defensive: size <= 0 → return false.
 //     Example: arr={5,5,5}, size=3, target=5 → arr={5,5,?}, size=2
 //              (only the FIRST 5 is removed)
+bool removeFirst(int arr[], int& size, int target) {
+    if (size <= 0) {
+        return false;
+    }
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+            shiftLeftFrom(arr, size, i);
+            size--;
+            return true;
+        }
+    }
+    return false;
+}
 
 
 // 4b. Write bool insertAt(int arr[], int& size, int capacity,
@@ -210,6 +223,15 @@ bool prependValue(int arr[], int& size, int capacity, int value) {
 //     Defensive: size >= capacity OR index < 0 OR index > size → false.
 //     Example: arr={10,20,30}, size=3, capacity=5, index=1, value=99
 //              → arr={10,99,20,30,?}, size=4
+bool insertAt(int arr[], int& size, int capacity, int index, int value) {
+    if (size >= capacity || index < 0 || index > size) {
+        return false;
+    }
+    shiftRightFrom(arr, size, index);
+    arr[index] = value;
+    size++;
+    return true;
+}
 
 
 // ------------------------------------------------------------
@@ -282,15 +304,15 @@ void runTests() {
     assert(sz == 3 && e[0] == 10 && e[1] == 20 && e[2] == 30);
 
     // --- Part 4 ---
-    // int f[] = {5, 5, 5};
-    // sz = 3;
-    // assert(removeFirst(f, sz, 5) == true);
-    // assert(sz == 2 && f[0] == 5 && f[1] == 5);
+    int f[] = {5, 5, 5};
+    sz = 3;
+    assert(removeFirst(f, sz, 5) == true);
+    assert(sz == 2 && f[0] == 5 && f[1] == 5);
 
-    // int g[5] = {10, 20, 30};
-    // sz = 3;
-    // assert(insertAt(g, sz, 5, 1, 99) == true);
-    // assert(sz == 4 && g[0] == 10 && g[1] == 99 && g[2] == 20 && g[3] == 30);
+    int g[5] = {10, 20, 30};
+    sz = 3;
+    assert(insertAt(g, sz, 5, 1, 99) == true);
+    assert(sz == 4 && g[0] == 10 && g[1] == 99 && g[2] == 20 && g[3] == 30);
 
     // --- Part 5 ---
     // int h[] = {5, 5, 10, 5};
