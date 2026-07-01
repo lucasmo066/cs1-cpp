@@ -262,14 +262,26 @@ bool isSorted(const int arr[], int size) {
 //     Write your answers as comments below.
 
 // Answer 12a:
+//   void displayPlayer(Player p) copies the whole Player object into the parameter.
+//   void displayPlayer(const Player& p) does not copy — it aliases the caller's object.
+
 // Answer 12b:
+//   displayPlayer(Player p) cannot modify the caller's Player (only its local copy).
+//   displayPlayer(const Player& p) also cannot modify the caller's Player because const
+//   blocks changes through the reference.
+
 // Answer 12c:
+//   Use const Player& in production: no expensive copy of 20+ fields, and const makes
+//   read-only intent clear to anyone reading or calling the function.
 
 
 // 13. Why does removeFirst need int& size but findMinMax does NOT need
 //     int& size? Write your reasoning as a comment.
 
 // Answer 13:
+//   removeFirst changes how many elements the caller considers valid — size must shrink
+//   in the caller's scope, so we need int& size. findMinMax only reads the array and
+//   writes min/max through separate out-parameters; it never changes the logical length.
 
 
 void runTests() {
@@ -298,10 +310,20 @@ void runTests() {
     splitEvenOdd(data, 5, ev, od);
     assert(ev == 2 && od == 3);
 
+    int statMin = 0, statMax = 0;
+    double statAvg = 0.0;
+    calcStats(data, 5, statMin, statMax, statAvg);
+    assert(statMin == -2 && statMax == 9 && statAvg == 3.8);
+
     int arr[] = {1, 2, 3};
     int sz = 3;
     assert(removeFirst(arr, sz, 2) == true);
     assert(sz == 2 && arr[0] == 1 && arr[1] == 3);
+
+    int ins[5] = {10, 20, 30};
+    sz = 3;
+    assert(insertAt(ins, sz, 5, 1, 99) == true);
+    assert(sz == 4 && ins[0] == 10 && ins[1] == 99 && ins[2] == 20 && ins[3] == 30);
 
     assert(isSorted(data, 5) == false);
     int sorted[] = {1, 3, 5, 7};

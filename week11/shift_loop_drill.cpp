@@ -46,7 +46,6 @@ using namespace std;
 //   final logical array (indices 0 .. size-1): { ?, ?, ? }
 
 
-
 // Trace 2 — shift LEFT at the FRONT (index 0)
 //   arr = {10, 20, 30}, size = 3
 //   Remove index 0.
