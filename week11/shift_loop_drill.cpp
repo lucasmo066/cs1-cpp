@@ -147,6 +147,14 @@ void shiftRightFrom(int arr[], int size, int fromIndex) {
 //     Defensive: if size <= 0 or index < 0 or index >= size, return false.
 //     Hint: reuse shiftLeftFrom, or write the loop inline.
 //     Example: arr={10,20,30}, size=3, index=0 → arr={20,30,?}, size=2
+bool removeAt(int arr[], int& size, int index) {
+    if (size <= 0 || index < 0 || index >= size) {
+        return false;
+    }
+    shiftLeftFrom(arr, size, index);
+    size--;
+    return true;
+}
 
 
 // 3b. Write bool appendValue(int arr[], int& size, int capacity, int value)
@@ -155,6 +163,14 @@ void shiftRightFrom(int arr[], int size, int fromIndex) {
 //     Example: arr={10,20}, size=2, capacity=5, value=30
 //              → arr={10,20,30,?,?}, size=3
 //     Note: the shift loop should NOT run — good edge case to understand.
+bool appendValue(int arr[], int& size, int capacity, int value) {
+    if (size >= capacity) {
+        return false;
+    }
+    arr[size] = value;
+    size++;
+    return true;
+}
 
 
 // 3c. Write bool prependValue(int arr[], int& size, int capacity, int value)
@@ -163,6 +179,15 @@ void shiftRightFrom(int arr[], int size, int fromIndex) {
 //     Example: arr={20,30}, size=2, capacity=5, value=10
 //              → arr={10,20,30,?,?}, size=3
 //     This is the hardest shift-right case — trace it before coding.
+bool prependValue(int arr[], int& size, int capacity, int value) {
+    if (size >= capacity) {
+        return false;
+    }
+    shiftRightFrom(arr, size, 0);
+    arr[0] = value;
+    size++;
+    return true;
+}
 
 
 // ------------------------------------------------------------
@@ -241,20 +266,20 @@ void runTests() {
     assert(b[0] == 10 && b[1] == 20 && b[2] == 20 && b[3] == 30);
 
     // --- Part 3 ---
-    // int c[] = {10, 20, 30};
-    // int sz = 3;
-    // assert(removeAt(c, sz, 0) == true);
-    // assert(sz == 2 && c[0] == 20 && c[1] == 30);
+    int c[] = {10, 20, 30};
+    int sz = 3;
+    assert(removeAt(c, sz, 0) == true);
+    assert(sz == 2 && c[0] == 20 && c[1] == 30);
 
-    // int d[5] = {10, 20};
-    // sz = 2;
-    // assert(appendValue(d, sz, 5, 30) == true);
-    // assert(sz == 3 && d[2] == 30);
+    int d[5] = {10, 20};
+    sz = 2;
+    assert(appendValue(d, sz, 5, 30) == true);
+    assert(sz == 3 && d[2] == 30);
 
-    // int e[5] = {20, 30};
-    // sz = 2;
-    // assert(prependValue(e, sz, 5, 10) == true);
-    // assert(sz == 3 && e[0] == 10 && e[1] == 20 && e[2] == 30);
+    int e[5] = {20, 30};
+    sz = 2;
+    assert(prependValue(e, sz, 5, 10) == true);
+    assert(sz == 3 && e[0] == 10 && e[1] == 20 && e[2] == 30);
 
     // --- Part 4 ---
     // int f[] = {5, 5, 5};
