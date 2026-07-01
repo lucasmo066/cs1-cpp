@@ -40,49 +40,49 @@ using namespace std;
 //   arr = {10, 20, 30, 40}, size = 4
 //   Remove the element at index 1 (value 20).
 //
-//   j = 1: arr[1] = arr[2]  →  arr = { ?, ?, ?, ? }
-//   j = 2: arr[2] = arr[3]  →  arr = { ?, ?, ?, ? }
-//   after size--: size = ?
-//   final logical array (indices 0 .. size-1): { ?, ?, ? }
+//   j = 1: arr[1] = arr[2]  →  arr = { 10, 30, 30, 40 }
+//   j = 2: arr[2] = arr[3]  →  arr = { 10, 30, 40, 40 }
+//   after size--: size = 3
+//   final logical array (indices 0 .. size-1): { 10, 30, 40 }
 
 
 // Trace 2 — shift LEFT at the FRONT (index 0)
 //   arr = {10, 20, 30}, size = 3
 //   Remove index 0.
 //
-//   j = 0: arr[0] = arr[1]  →  arr = { ?, ?, ? }
-//   j = 1: arr[1] = arr[2]  →  arr = { ?, ?, ? }
-//   after size--: size = ?
-//   final: { ?, ? }
+//   j = 0: arr[0] = arr[1]  →  arr = { 20, 20, 30 }
+//   j = 1: arr[1] = arr[2]  →  arr = { 20, 30, 30 }
+//   after size--: size = 2
+//   final: { 20, 30 }
 
 
 // Trace 3 — shift RIGHT, insert at index 1
 //   arr = {10, 20, 30}, size = 3, insert value 99 at index 1
 //
-//   j = 2: arr[3] = arr[2]  →  arr = { ?, ?, ?, ? }
-//   j = 1: arr[2] = arr[1]  →  arr = { ?, ?, ?, ? }
-//   arr[1] = 99               →  arr = { ?, ?, ?, ? }
-//   after size++: size = ?
-//   final: { ?, ?, ?, ? }
+//   j = 2: arr[3] = arr[2]  →  arr = { 10, 20, 20, 30 }
+//   j = 1: arr[2] = arr[1]  →  arr = { 10, 20, 20, 30 }
+//   arr[1] = 99               →  arr = { 10, 99, 20, 30 }
+//   after size++: size = 4
+//   final: { 10, 99, 20, 30 }
 
 
 // Trace 4 — shift RIGHT at the FRONT (index 0)
 //   arr = {10, 20, 30}, size = 3, insert value 99 at index 0
 //
-//   j = 2: arr[3] = arr[2]  →  ?
-//   j = 1: arr[2] = arr[1]  →  ?
-//   j = 0: arr[1] = arr[0]  →  ?
-//   arr[0] = 99               →  ?
-//   after size++: size = ?
+//   j = 2: arr[3] = arr[2]  →  { 10, 20, 20, 30 }
+//   j = 1: arr[2] = arr[1]  →  { 10, 20, 20, 30 }
+//   j = 0: arr[1] = arr[0]  →  { 10, 10, 20, 30 }
+//   arr[0] = 99               →  { 99, 10, 20, 30 }
+//   after size++: size = 4
 
 
 // Trace 5 — APPEND (insert at index == size)
 //   arr = {10, 20, 30}, size = 3, capacity = 5
 //   insert value 99 at index 3
 //
-//   Does the shift loop run at all? (yes / no)
-//   What does arr[3] become?
-//   size after insert = ?
+//   Does the shift loop run at all? (yes / no)  →  no (fromIndex == size)
+//   What does arr[3] become?  →  99
+//   size after insert = 4
 
 
 // Trace 6 — WRONG direction (understand the bug)
@@ -90,9 +90,10 @@ using namespace std;
 //   Someone writes a FORWARD shift-right loop:
 //     for (int j = 1; j < size; j++) { arr[j + 1] = arr[j]; }
 //
-//   j = 1: arr[2] = arr[1]  →  arr = { ?, ?, ? }
-//   j = 2: arr[3] = arr[2]  →  arr = { ?, ?, ? }
-//   What value was LOST? Why?
+//   j = 1: arr[2] = arr[1]  →  arr = { 10, 20, 20 }
+//   j = 2: arr[3] = arr[2]  →  arr = { 10, 20, 20, 20 }
+//   What value was LOST? Why?  →  30 was overwritten at index 2 before it
+//   could be copied forward; forward shifting clobbers data still needed.
 
 
 // ------------------------------------------------------------
@@ -108,6 +109,14 @@ using namespace std;
 //     Defensive: if fromIndex < 0 or fromIndex >= size, return immediately.
 //     Example: arr={10,20,30,40}, size=4, fromIndex=1
 //              → arr={10,30,40,40}  (size still 4 until caller fixes it)
+void shiftLeftFrom(int arr[], int size, int fromIndex) {
+    if (fromIndex < 0 || fromIndex >= size) {
+        return;
+    }
+    for (int j = fromIndex; j < size - 1; j++) {
+        arr[j] = arr[j + 1];
+    }
+}
 
 
 // 2b. Write void shiftRightFrom(int arr[], int size, int fromIndex)
@@ -117,6 +126,14 @@ using namespace std;
 //     Defensive: if fromIndex < 0 or fromIndex > size, return immediately.
 //     Example: arr={10,20,30}, size=3, fromIndex=1
 //              → arr={10,20,20,30}  (gap not filled yet; size still 3)
+void shiftRightFrom(int arr[], int size, int fromIndex) {
+    if (fromIndex < 0 || fromIndex > size) {
+        return;
+    }
+    for (int j = size - 1; j >= fromIndex; j--) {
+        arr[j + 1] = arr[j];
+    }
+}
 
 
 // ------------------------------------------------------------
@@ -215,13 +232,13 @@ using namespace std;
 
 void runTests() {
     // --- Part 2 ---
-    // int a[] = {10, 20, 30, 40};
-    // shiftLeftFrom(a, 4, 1);
-    // assert(a[0] == 10 && a[1] == 30 && a[2] == 40 && a[3] == 40);
+    int a[] = {10, 20, 30, 40};
+    shiftLeftFrom(a, 4, 1);
+    assert(a[0] == 10 && a[1] == 30 && a[2] == 40 && a[3] == 40);
 
-    // int b[] = {10, 20, 30};
-    // shiftRightFrom(b, 3, 1);
-    // assert(b[0] == 10 && b[1] == 20 && b[2] == 20 && b[3] == 30);
+    int b[] = {10, 20, 30};
+    shiftRightFrom(b, 3, 1);
+    assert(b[0] == 10 && b[1] == 20 && b[2] == 20 && b[3] == 30);
 
     // --- Part 3 ---
     // int c[] = {10, 20, 30};
