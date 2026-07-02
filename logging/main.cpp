@@ -24,6 +24,13 @@ int main() {
     writeLogEntry("Retrying connection", LogLevel::WARNING);           // WARNING, no context
     writeLogEntry("Request timed out", LogLevel::ERROR, "endpoint:/api/v1/users");
 
+    cout << endl << "--- Min log level filter (INFO and above) ---" << endl;
+    setMinLogLevel(LogLevel::INFO);
+    log("This DEBUG line is hidden", LogLevel::DEBUG);
+    log("This INFO line still appears", LogLevel::INFO);
+    log("Filter floor is INFO", LogLevel::INFO, "min_level=INFO");
+    setMinLogLevel(LogLevel::DEBUG);
+
     cout << endl << "Done. Check program.log in this folder." << endl;
     return 0;
 }

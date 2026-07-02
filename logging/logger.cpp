@@ -8,6 +8,20 @@
 using namespace std;
 
 static const char* LOG_FILE = "program.log";
+static LogLevel minLogLevel = LogLevel::DEBUG;
+
+void setMinLogLevel(LogLevel minLevel) {
+    minLogLevel = minLevel;
+}
+
+LogLevel getMinLogLevel() {
+    return minLogLevel;
+}
+
+// True when this message should be written (level is at or above the floor).
+static bool shouldLog(LogLevel level) {
+    return static_cast<int>(level) >= static_cast<int>(minLogLevel);
+}
 
 // Map each LogLevel to a fixed-width label for formatted log lines.
 static string levelToString(LogLevel level) {
@@ -55,6 +69,9 @@ static void outputLogLine(const string& line) {
 // --- Public API ---
 
 void writeLogEntry(const string& message, LogLevel level, const string& context) {
+    if (!shouldLog(level)) {
+        return;
+    }
     outputLogLine(formatLogLine(message, level, context));
 }
 

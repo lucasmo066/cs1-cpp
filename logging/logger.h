@@ -24,4 +24,8 @@ void writeLogEntry(const std::string& message,
                    LogLevel level = LogLevel::INFO,
                    const std::string& context = "");
 
+// Drop messages below this level (default: show everything).
+void setMinLogLevel(LogLevel minLevel);
+LogLevel getMinLogLevel();
+
 #endif
