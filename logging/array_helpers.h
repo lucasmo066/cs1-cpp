@@ -14,5 +14,6 @@ int countAboveValue(const int arr[], int size, int threshold);
 int countInRange(const int arr[], int size, int low, int high);
 void arrayToCsvLine(const int arr[], int size, std::string& out);
 std::string summarizeBatch(const std::string& name, const int arr[], int size);
+std::string formatArrayBracketed(const int arr[], int size, const std::string& label);
 
 #endif

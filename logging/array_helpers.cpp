@@ -100,3 +100,20 @@ string summarizeBatch(const string& name, const int arr[], int size) {
             << " max=" << arrayMax(arr, size);
     return summary.str();
 }
+
+string formatArrayBracketed(const int arr[], int size, const string& label) {
+    ostringstream line;
+    line << label << ": [";
+    if (size <= 0) {
+        line << "]";
+        return line.str();
+    }
+    for (int i = 0; i < size; i++) {
+        line << arr[i];
+        if (i < size - 1) {
+            line << ", ";
+        }
+    }
+    line << "]";
+    return line.str();
+}

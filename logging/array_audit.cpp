@@ -111,6 +111,10 @@ int main() {
     cout << summarizeBatch("sensorsC", sensorsC, 6) << endl;
     cout << summarizeBatch("sensorsD", sensorsD, 5) << endl;
 
+    cout << endl << "Bracketed snapshots:" << endl;
+    cout << formatArrayBracketed(sensorsA, 5, "sensorsA") << endl;
+    cout << formatArrayBracketed(sensorsC, 6, "sensorsC") << endl;
+
     cout << endl << "Done. See program.log for full audit trail." << endl;
     return 0;
 }
