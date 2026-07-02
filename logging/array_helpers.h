@@ -3,6 +3,8 @@
 
 #include <string>
 
+enum class LogLevel;
+
 int arraySum(const int arr[], int size);
 double arrayAverage(const int arr[], int size);
 int arrayMin(const int arr[], int size);
@@ -15,5 +17,6 @@ int countInRange(const int arr[], int size, int low, int high);
 void arrayToCsvLine(const int arr[], int size, std::string& out);
 std::string summarizeBatch(const std::string& name, const int arr[], int size);
 std::string formatArrayBracketed(const int arr[], int size, const std::string& label);
+void logArraySnapshot(const int arr[], int size, const std::string& label, LogLevel level);
 
 #endif

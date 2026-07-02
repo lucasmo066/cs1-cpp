@@ -99,6 +99,7 @@ int main() {
     int sensorsD[] = {5, 105, 22, 18, 200};
 
     auditBatch("sensorsA", sensorsA, 5, 10);
+    logArraySnapshot(sensorsA, 5, "sensorsA-before-audit", LogLevel::DEBUG);
     auditBatch("sensorsB", sensorsB, 5, 10);
     auditBatch("sensorsC-empty", sensorsB, 0, 10);
 

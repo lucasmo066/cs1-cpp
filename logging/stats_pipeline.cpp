@@ -30,6 +30,7 @@ void logBatchSummary(const BatchJob& job) {
 
     string summary = summarizeBatch(job.name, job.values, job.size);
     log(summary, LogLevel::DEBUG, job.name);
+    logArraySnapshot(job.values, job.size, job.name + "-snapshot", LogLevel::DEBUG);
 
     string csv;
     arrayToCsvLine(job.values, job.size, csv);

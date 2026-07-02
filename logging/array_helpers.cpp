@@ -1,4 +1,5 @@
 #include "array_helpers.h"
+#include "logger.h"
 
 #include <sstream>
 
@@ -116,4 +117,10 @@ string formatArrayBracketed(const int arr[], int size, const string& label) {
     }
     line << "]";
     return line.str();
+}
+
+void logArraySnapshot(const int arr[], int size, const string& label, LogLevel level) {
+    string snapshot = formatArrayBracketed(arr, size, label);
+    string context = "size=" + to_string(size);
+    log(snapshot, level, context);
 }
