@@ -5,6 +5,9 @@
 using namespace std;
 
 int main() {
+    clearLogFile();
+    logSessionBanner("logging_demo");
+
     cout << "=== Logging system demo ===" << endl;
     cout << "Output goes to console and program.log (append mode)." << endl << endl;
 

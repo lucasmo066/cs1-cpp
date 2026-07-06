@@ -86,3 +86,17 @@ void log(const string& message, LogLevel level) {
 void log(const string& message, LogLevel level, const string& context) {
     writeLogEntry(message, level, context);
 }
+
+void clearLogFile() {
+    ofstream logFile(LOG_FILE, ios::trunc);
+    if (!logFile.is_open()) {
+        cerr << "Failed to clear " << LOG_FILE << "." << endl;
+    }
+}
+
+void logSessionBanner(const string& sessionName) {
+    string rule(60, '-');
+    writeLogEntry(rule, LogLevel::INFO);
+    writeLogEntry("SESSION: " + sessionName, LogLevel::INFO);
+    writeLogEntry(rule, LogLevel::INFO);
+}

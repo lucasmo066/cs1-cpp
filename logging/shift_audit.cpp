@@ -94,6 +94,9 @@ void demoFailedInsert() {
 }
 
 int main() {
+    clearLogFile();
+    logSessionBanner("shift_audit");
+
     cout << "=== Shift audit logger ===" << endl << endl;
 
     demoRemoveAt();

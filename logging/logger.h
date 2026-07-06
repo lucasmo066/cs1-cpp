@@ -28,4 +28,8 @@ void writeLogEntry(const std::string& message,
 void setMinLogLevel(LogLevel minLevel);
 LogLevel getMinLogLevel();
 
+// Truncate program.log before a new demo run; writes a visible session header.
+void clearLogFile();
+void logSessionBanner(const std::string& sessionName);
+
 #endif
