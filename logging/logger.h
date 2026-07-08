@@ -17,6 +17,13 @@ void log(const std::string& message);
 void log(const std::string& message, LogLevel level);
 void log(const std::string& message, LogLevel level, const std::string& context);
 
+// Level shortcuts — same as log(message, LogLevel::X) with optional context.
+void logDebug(const std::string& message, const std::string& context = "");
+void logInfo(const std::string& message, const std::string& context = "");
+void logWarning(const std::string& message, const std::string& context = "");
+void logError(const std::string& message, const std::string& context = "");
+void logCritical(const std::string& message, const std::string& context = "");
+
 // Internal helper declared here so default parameters are visible at the call site.
 // Callers in other translation units can use: writeLogEntry("msg") or
 // writeLogEntry("msg", LogLevel::WARNING) and omit trailing arguments.

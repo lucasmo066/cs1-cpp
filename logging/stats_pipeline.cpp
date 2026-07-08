@@ -21,7 +21,7 @@ struct BatchJob {
 };
 
 void logBatchSummary(const BatchJob& job) {
-    log("Pipeline received batch: " + job.name, LogLevel::INFO);
+    logInfo("Pipeline received batch: " + job.name);
 
     if (job.size <= 0) {
         log("Rejected empty batch", LogLevel::WARNING, job.name);
@@ -60,6 +60,12 @@ void logBatchSummary(const BatchJob& job) {
             job.name);
     }
 
+    if (arrayIsSorted(job.values, job.size)) {
+        logDebug("Batch is sorted", job.name);
+    } else {
+        logWarning("Batch is not sorted", job.name);
+    }
+
     writeLogEntry("Batch processing finished", LogLevel::INFO, job.name);
 }
 
@@ -84,6 +90,9 @@ void runPipelineDemo() {
 }
 
 int main() {
+    clearLogFile();
+    logSessionBanner("stats_pipeline");
+
     cout << "=== Stats pipeline ===" << endl << endl;
     runPipelineDemo();
     cout << endl << "Done. See program.log for details." << endl;

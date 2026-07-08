@@ -87,6 +87,26 @@ void log(const string& message, LogLevel level, const string& context) {
     writeLogEntry(message, level, context);
 }
 
+void logDebug(const string& message, const string& context) {
+    writeLogEntry(message, LogLevel::DEBUG, context);
+}
+
+void logInfo(const string& message, const string& context) {
+    writeLogEntry(message, LogLevel::INFO, context);
+}
+
+void logWarning(const string& message, const string& context) {
+    writeLogEntry(message, LogLevel::WARNING, context);
+}
+
+void logError(const string& message, const string& context) {
+    writeLogEntry(message, LogLevel::ERROR, context);
+}
+
+void logCritical(const string& message, const string& context) {
+    writeLogEntry(message, LogLevel::CRITICAL, context);
+}
+
 void clearLogFile() {
     ofstream logFile(LOG_FILE, ios::trunc);
     if (!logFile.is_open()) {

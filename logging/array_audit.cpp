@@ -48,9 +48,13 @@ void auditBatch(const string& batchName, const int arr[], int size, int alertThr
     }
 
     if (largest > 90) {
-        log("Maximum value " + to_string(largest) + " is unusually high",
-            LogLevel::WARNING,
-            batchName);
+        logWarning("Maximum value " + to_string(largest) + " is unusually high", batchName);
+    }
+
+    if (arrayIsSorted(arr, size)) {
+        logDebug("Batch readings are in non-decreasing order", batchName);
+    } else {
+        logWarning("Batch readings are not sorted", batchName);
     }
 
     writeLogEntry("Audit complete", LogLevel::INFO, batchName);
@@ -91,6 +95,9 @@ void auditRangeCompliance(const string& batchName, const int arr[], int size, in
 }
 
 int main() {
+    clearLogFile();
+    logSessionBanner("array_audit");
+
     cout << "=== Array audit logger ===" << endl << endl;
 
     int sensorsA[] = {42, 38, 0, 51, 47};

@@ -27,6 +27,12 @@ int main() {
     writeLogEntry("Retrying connection", LogLevel::WARNING);           // WARNING, no context
     writeLogEntry("Request timed out", LogLevel::ERROR, "endpoint:/api/v1/users");
 
+    cout << endl << "--- Level shortcuts ---" << endl;
+    logDebug("Shortcut DEBUG line", "demo=shortcuts");
+    logInfo("Shortcut INFO line");
+    logWarning("Shortcut WARNING line");
+    logError("Shortcut ERROR line", "module=payment");
+
     cout << endl << "--- Min log level filter (INFO and above) ---" << endl;
     setMinLogLevel(LogLevel::INFO);
     log("This DEBUG line is hidden", LogLevel::DEBUG);

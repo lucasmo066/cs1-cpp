@@ -10,6 +10,7 @@ double arrayAverage(const int arr[], int size);
 int arrayMin(const int arr[], int size);
 int arrayMax(const int arr[], int size);
 bool arrayContains(const int arr[], int size, int target);
+bool arrayIsSorted(const int arr[], int size);
 int arrayCountValue(const int arr[], int size, int value);
 int countAtOrBelow(const int arr[], int size, int threshold);
 int countAboveValue(const int arr[], int size, int threshold);

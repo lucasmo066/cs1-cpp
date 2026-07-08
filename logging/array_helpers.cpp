@@ -45,6 +45,14 @@ bool arrayContains(const int arr[], int size, int target) {
     return false;
 }
 
+bool arrayIsSorted(const int arr[], int size) {
+    if (size <= 1) return true;
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < arr[i - 1]) return false;
+    }
+    return true;
+}
+
 int arrayCountValue(const int arr[], int size, int value) {
     if (size <= 0) return 0;
     int count = 0;
