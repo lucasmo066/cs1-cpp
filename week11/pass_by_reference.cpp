@@ -215,18 +215,24 @@ bool insertAt(int arr[], int& size, int capacity, int index, int value) {
 //     This is the pattern for every display/print function in OOP.
 //     Defensive: if size <= 0, print label + ": []"
 void printArrayInfo(const int arr[], int size, const string& label) {
-    cout << label << ": [";
+    //defensive, if there is no data to work with, print the label and empty array
     if (size <= 0) {
-        cout << "]";
+        cout << label + ": []" << endl;
         return;
     }
+
+    cout << label << ": [";
+
     for (int i = 0; i < size; i++) {
-        cout << arr[i];
-        if (i < size - 1) {
-            cout << ", ";
+        //every iteration add the arr[i] to the values list
+        if (i != size -1) {
+            cout << arr[i] << ", ";
+        } else {
+            cout << arr[i];
         }
     }
-    cout << "]";
+
+    cout << "]" << endl;
 }
 
 // 11. Write bool isSorted(const int arr[], int size)
@@ -235,17 +241,18 @@ void printArrayInfo(const int arr[], int size, const string& label) {
 //     Example: {1,2,2,5} → true    {1,3,2,5} → false
 //     Defensive: size <= 1 → return true (0 or 1 element is trivially sorted)
 bool isSorted(const int arr[], int size) {
-    if (size <= 1) {
-        return true;
-    }
+    //defensive
+    if (size <= 1) return true;
 
-    for (int i = 1; i < size; i++) {
-        if (arr[i] < arr[i - 1]) {
-            return false;
+    for (int i = 0; i < size; i++) {
+        //each iteration, check if the arr[i] is >= the previous. if it is to stop condition, return true, else false 
+        if (arr[i] >= i-1) {
+            return true;
         }
     }
 
-    return true;
+    return false;
+
 }
 
 // ------------------------------------------------------------
