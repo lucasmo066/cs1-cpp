@@ -6,25 +6,6 @@ Every file here is something I wrote (or am writing) by hand. The comments in ea
 
 ---
 
-## How I use Cursor
-
-I treat Cursor as a **patient tutor**, not an answer machine.
-
-A project rule in `.cursor/rules/cs1-cpp-tutor.mdc` keeps the AI in tutor mode: it diagnoses compile errors and logic bugs, asks guiding questions, and gives minimal hints unless I explicitly ask for a full solution. That matters because the learning happens when I trace an example, fix an off-by-one error, or reason about why `int&` changes the caller's variable — not when code gets pasted in for me.
-
-**Typical workflow:**
-
-1. Open a practice file and read the comment prompts at the top.
-2. Answer the "think first" questions in comments (loop boundaries, base cases, what `size` means).
-3. Write the code myself from scratch — no pre-filled stubs.
-4. Compile locally and run small tests from `main()` or `runTests()`.
-5. Ask Cursor when I'm stuck: *"Does this work?"*, *"Why does this assert fail?"*, or *"What's wrong with my shift loop?"*
-6. Fix it, re-run, and move on.
-
-The rule also nudges **defensive programming**: checking `size` before loops, handling edge cases, and documenting what a function returns when input is invalid. That habit carries over to real codebases where bad data is normal.
-
----
-
 ## Repository layout
 
 ### `week10/` — Foundations
@@ -58,12 +39,21 @@ A small multi-file project for structured logging and array auditing. Uses heade
 
 ---
 
-## Practice file format
+## How I work through a file
+
+1. Read the comment prompts at the top of the file.
+2. Answer the "think first" questions in comments — loop boundaries, base cases, what `size` means.
+3. Write the code from scratch. No pre-filled stubs.
+4. Compile locally and run small tests from `main()` or `runTests()`.
+5. When something breaks, trace it on paper first, then fix and re-run.
+
+**Practice file format:**
 
 - **Prompts are comments only.** There are no pre-written function bodies or `TODO` skeletons to fill in.
-- **I type every line.** Stubs would shortcut the thinking that the prompts are designed to force.
 - **Specs live in the comments.** When something looks wrong, the comment block is the source of truth.
 - **Tests are simple.** `#include <cassert>` and a `runTests()` function are enough at this level — uncomment one assert at a time.
+
+I also try to build **defensive programming** habits along the way: checking `size` before loops, handling edge cases, and documenting what a function returns when input is invalid.
 
 ---
 
@@ -87,7 +77,7 @@ Flags used consistently across the repo:
 
 ## What comes next
 
-Week 11 wraps up references, shifting, and overloading. After that, the plan is a **small OOP project** — multiple classes with member functions — still written by hand, still tutored through Cursor.
+Week 11 wraps up references, shifting, and overloading. After that, the plan is a **small OOP project** — multiple classes with member functions.
 
 ---
 
@@ -97,3 +87,9 @@ Week 11 wraps up references, shifting, and overloading. After that, the plan is 
 CU Boulder / Red Rocks Community College (RRCC)
 
 This repo is my working notebook for that course: progress over perfection, one concept at a time.
+
+---
+
+## Study setup
+
+I use Cursor as my editor and keep a project rule (`.cursor/rules/cs1-cpp-tutor.mdc`) that nudges the assistant toward tutoring — hints and questions when I'm stuck, not full solutions dropped in unless I ask. That keeps the focus on tracing examples, fixing off-by-one errors, and understanding *why* something works, which is where the actual learning happens.
