@@ -244,51 +244,15 @@ bool isSorted(const int arr[], int size) {
     //defensive
     if (size <= 1) return true;
 
-    for (int i = 0; i < size; i++) {
-        //each iteration, check if the arr[i] is >= the previous. if it is to stop condition, return true, else false 
-        if (arr[i] >= i-1) {
-            return true;
-        }
+    for (int i = 1; i < size; i++) {
+       if (arr[i] < arr[i -1]) {
+            return false;
+       }
     }
 
-    return false;
-
+    return true;
 }
 
-// ------------------------------------------------------------
-// PART 5 — Think-about (no code required, write answer in comments)
-// ------------------------------------------------------------
-
-// 12. You have these two signatures:
-//       void displayPlayer(Player p)
-//       void displayPlayer(const Player& p)
-//     Assume Player holds a name, team, and 20 stat fields.
-//     a) Which version copies the object? Which doesn't?
-//     b) Can either version modify the caller's Player?
-//     c) Which would you use in production and why?
-//     Write your answers as comments below.
-
-// Answer 12a:
-//   void displayPlayer(Player p) copies the whole Player object into the parameter.
-//   void displayPlayer(const Player& p) does not copy — it aliases the caller's object.
-
-// Answer 12b:
-//   displayPlayer(Player p) cannot modify the caller's Player (only its local copy).
-//   displayPlayer(const Player& p) also cannot modify the caller's Player because const
-//   blocks changes through the reference.
-
-// Answer 12c:
-//   Use const Player& in production: no expensive copy of 20+ fields, and const makes
-//   read-only intent clear to anyone reading or calling the function.
-
-
-// 13. Why does removeFirst need int& size but findMinMax does NOT need
-//     int& size? Write your reasoning as a comment.
-
-// Answer 13:
-//   removeFirst changes how many elements the caller considers valid — size must shrink
-//   in the caller's scope, so we need int& size. findMinMax only reads the array and
-//   writes min/max through separate out-parameters; it never changes the logical length.
 
 
 void runTests() {
