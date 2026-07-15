@@ -40,6 +40,18 @@ int main() {
     log("Filter floor is INFO", LogLevel::INFO, "min_level=INFO");
     setMinLogLevel(LogLevel::DEBUG);
 
+    cout << endl << "--- Operation reports ---" << endl;
+    logOperationReport("sync_users", true, 10, 10, "All rows applied");
+    logOperationReport("export_csv", false, 3, 8, "Disk full on step 4");
+
+    cout << endl << "--- Metric block ---" << endl;
+    string metricNames[] = {"requests", "errors", "retries", "cache_hits"};
+    int metricValues[] = {120, 0, 4, 95};
+    logMetricBlock("api_gateway", metricNames, metricValues, 4);
+
+    cout << endl << "--- Log file summary ---" << endl;
+    summarizeLogFile();
+
     cout << endl << "Done. Check program.log in this folder." << endl;
     return 0;
 }

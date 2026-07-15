@@ -39,4 +39,20 @@ LogLevel getMinLogLevel();
 void clearLogFile();
 void logSessionBanner(const std::string& sessionName);
 
+// Multi-line report for a named operation: start, progress, result, detail.
+void logOperationReport(const std::string& operation,
+                        bool success,
+                        int stepsCompleted,
+                        int stepsTotal,
+                        const std::string& detail = "");
+
+// Write a titled block of metric name/value pairs (parallel arrays).
+void logMetricBlock(const std::string& title,
+                    const std::string metricNames[],
+                    const int metricValues[],
+                    int metricCount);
+
+// Scan program.log, count lines by level, and write a summary report.
+void summarizeLogFile();
+
 #endif

@@ -120,3 +120,187 @@ void logSessionBanner(const string& sessionName) {
     writeLogEntry("SESSION: " + sessionName, LogLevel::INFO);
     writeLogEntry(rule, LogLevel::INFO);
 }
+
+void logOperationReport(const string& operation,
+                        bool success,
+                        int stepsCompleted,
+                        int stepsTotal,
+                        const string& detail) {
+    string context = "operation=" + operation;
+
+    writeLogEntry("Operation started: " + operation, LogLevel::INFO, context);
+
+    if (stepsTotal < 0) {
+        writeLogEntry("Invalid stepsTotal — cannot compute progress",
+                      LogLevel::ERROR,
+                      context);
+        writeLogEntry("Operation aborted: " + operation, LogLevel::ERROR, context);
+        return;
+    }
+
+    if (stepsCompleted < 0) {
+        stepsCompleted = 0;
+    }
+    if (stepsCompleted > stepsTotal) {
+        stepsCompleted = stepsTotal;
+    }
+
+    int percent = 0;
+    if (stepsTotal > 0) {
+        percent = (stepsCompleted * 100) / stepsTotal;
+    }
+
+    writeLogEntry("Progress: " + to_string(stepsCompleted) + "/" + to_string(stepsTotal)
+                      + " steps (" + to_string(percent) + "%)",
+                  LogLevel::DEBUG,
+                  context);
+
+    if (!detail.empty()) {
+        writeLogEntry("Detail: " + detail,
+                      success ? LogLevel::INFO : LogLevel::WARNING,
+                      context);
+    }
+
+    if (success) {
+        if (stepsCompleted == stepsTotal && stepsTotal > 0) {
+            writeLogEntry("Operation completed successfully: " + operation,
+                          LogLevel::INFO,
+                          context);
+        } else {
+            writeLogEntry("Operation finished early (partial success): " + operation,
+                          LogLevel::WARNING,
+                          context);
+        }
+    } else {
+        writeLogEntry("Operation failed: " + operation, LogLevel::ERROR, context);
+        if (stepsCompleted > 0) {
+            writeLogEntry("Rolled back after " + to_string(stepsCompleted) + " completed step(s)",
+                          LogLevel::WARNING,
+                          context);
+        }
+    }
+}
+
+void logMetricBlock(const string& title,
+                    const string metricNames[],
+                    const int metricValues[],
+                    int metricCount) {
+    string rule(40, '=');
+    writeLogEntry(rule, LogLevel::INFO);
+    writeLogEntry("METRICS: " + title, LogLevel::INFO);
+
+    if (metricCount <= 0) {
+        writeLogEntry("No metrics provided", LogLevel::WARNING, "title=" + title);
+        writeLogEntry(rule, LogLevel::INFO);
+        return;
+    }
+
+    int sum = 0;
+    int minValue = metricValues[0];
+    int maxValue = metricValues[0];
+    int zeroCount = 0;
+
+    for (int i = 0; i < metricCount; i++) {
+        int value = metricValues[i];
+        sum += value;
+        if (value < minValue) {
+            minValue = value;
+        }
+        if (value > maxValue) {
+            maxValue = value;
+        }
+        if (value == 0) {
+            zeroCount++;
+        }
+
+        string row = "  " + metricNames[i] + " = " + to_string(value);
+        LogLevel rowLevel = LogLevel::DEBUG;
+        if (value < 0) {
+            rowLevel = LogLevel::ERROR;
+        } else if (value == 0) {
+            rowLevel = LogLevel::WARNING;
+        }
+        writeLogEntry(row, rowLevel, "metric_index=" + to_string(i));
+    }
+
+    writeLogEntry("Metric count: " + to_string(metricCount), LogLevel::INFO, title);
+    writeLogEntry("Sum: " + to_string(sum)
+                      + " | min: " + to_string(minValue)
+                      + " | max: " + to_string(maxValue),
+                  LogLevel::INFO,
+                  title);
+
+    if (zeroCount > 0) {
+        writeLogEntry("Zero-valued metrics: " + to_string(zeroCount),
+                      LogLevel::WARNING,
+                      title);
+    }
+
+    writeLogEntry(rule, LogLevel::INFO);
+}
+
+void summarizeLogFile() {
+    ifstream inFile(LOG_FILE);
+    if (!inFile.is_open()) {
+        cerr << "Failed to open " << LOG_FILE << " for reading." << endl;
+        writeLogEntry("summarizeLogFile could not open log file",
+                      LogLevel::ERROR,
+                      string(LOG_FILE));
+        return;
+    }
+
+    int totalLines = 0;
+    int debugCount = 0;
+    int infoCount = 0;
+    int warningCount = 0;
+    int errorCount = 0;
+    int criticalCount = 0;
+    int otherCount = 0;
+    string line;
+
+    while (getline(inFile, line)) {
+        totalLines++;
+        if (line.find("[CRITICAL]") != string::npos) {
+            criticalCount++;
+        } else if (line.find("[ERROR]") != string::npos) {
+            errorCount++;
+        } else if (line.find("[WARNING]") != string::npos) {
+            warningCount++;
+        } else if (line.find("[INFO]") != string::npos) {
+            infoCount++;
+        } else if (line.find("[DEBUG]") != string::npos) {
+            debugCount++;
+        } else {
+            otherCount++;
+        }
+    }
+    inFile.close();
+
+    string rule(50, '#');
+    writeLogEntry(rule, LogLevel::INFO);
+    writeLogEntry("LOG FILE SUMMARY: " + string(LOG_FILE), LogLevel::INFO);
+    writeLogEntry("Total lines scanned: " + to_string(totalLines), LogLevel::INFO);
+    writeLogEntry("DEBUG: " + to_string(debugCount), LogLevel::DEBUG);
+    writeLogEntry("INFO: " + to_string(infoCount), LogLevel::INFO);
+    writeLogEntry("WARNING: " + to_string(warningCount), LogLevel::WARNING);
+    writeLogEntry("ERROR: " + to_string(errorCount), LogLevel::ERROR);
+    writeLogEntry("CRITICAL: " + to_string(criticalCount), LogLevel::CRITICAL);
+
+    if (otherCount > 0) {
+        writeLogEntry("Unclassified lines: " + to_string(otherCount), LogLevel::WARNING);
+    }
+
+    int serious = warningCount + errorCount + criticalCount;
+    if (serious == 0) {
+        writeLogEntry("Health check: clean — no warnings or errors", LogLevel::INFO);
+    } else if (criticalCount > 0 || errorCount > 0) {
+        writeLogEntry("Health check: attention needed — " + to_string(serious)
+                          + " warning/error/critical line(s)",
+                      LogLevel::ERROR);
+    } else {
+        writeLogEntry("Health check: " + to_string(warningCount) + " warning(s) only",
+                      LogLevel::WARNING);
+    }
+
+    writeLogEntry(rule, LogLevel::INFO);
+}
