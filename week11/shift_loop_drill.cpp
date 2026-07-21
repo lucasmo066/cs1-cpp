@@ -81,14 +81,11 @@ void shiftRightFrom(int arr[], int size, int fromIndex) {
 //     Hint: reuse shiftLeftFrom, or write the loop inline.
 //     Example: arr={10,20,30}, size=3, index=0 → arr={20,30,?}, size=2
 bool removeAt(int arr[], int& size, int index) {
-    if (size <= 0 || index < 0 || index >= size) return -1;
+    if (size <= 0 || index < 0 || index >= size) return false;
 
-    for (int i = index; i < size - 1; i--) {
-        shiftLeftFrom();
-
-    }
-
-    return 0;
+    shiftLeftFrom(arr, size, index);
+    size--;
+    return true;
 }
 
 // 2b. Write bool appendValue(int arr[], int& size, int capacity, int value)
