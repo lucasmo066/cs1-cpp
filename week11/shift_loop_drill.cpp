@@ -129,7 +129,15 @@ bool prependValue(int arr[], int& size, int capacity, int value) {
 //     Defensive: size <= 0 → return false.
 //     Example: arr={5,5,5}, size=3, target=5 → arr={5,5,?}, size=2
 //              (only the FIRST 5 is removed)
+bool removeFirst(int arr[], int& size, int target) {
+    if (size <= 0) return false;
 
+    for (int i = 0;) {
+
+    }
+
+    return true;
+}
 
 // 3b. Write bool insertAt(int arr[], int& size, int capacity,
 //                         int index, int value)
