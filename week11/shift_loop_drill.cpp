@@ -70,8 +70,6 @@ void shiftRightFrom(int arr[], int size, int fromIndex) {
     }
 }
 
-
-
 // ------------------------------------------------------------
 // PART 2 — Known index (shift + size, no search)
 // These give you the index directly so you practice shift + int& size.
@@ -82,6 +80,16 @@ void shiftRightFrom(int arr[], int size, int fromIndex) {
 //     Defensive: if size <= 0 or index < 0 or index >= size, return false.
 //     Hint: reuse shiftLeftFrom, or write the loop inline.
 //     Example: arr={10,20,30}, size=3, index=0 → arr={20,30,?}, size=2
+bool removeAt(int arr[], int& size, int index) {
+    if (size <= 0 || index < 0 || index >= size) return -1;
+
+    for (int i = index; i < size - 1; i--) {
+        shiftLeftFrom();
+
+    }
+
+    return 0;
+}
 
 // 2b. Write bool appendValue(int arr[], int& size, int capacity, int value)
 //     Insert value at the end (index == size).
