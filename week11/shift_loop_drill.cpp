@@ -107,7 +107,15 @@ bool appendValue(int arr[], int& size, int capacity, int value) {
 //     Defensive: if size >= capacity, return false.
 //     Example: arr={20,30}, size=2, capacity=5, value=10
 //              → arr={10,20,30,?,?}, size=3
+bool prependValue(int arr[], int& size, int capacity, int value) {
+    if (size >= capacity) return false;
 
+    shiftRightFrom(arr, size, 0);
+    arr[0] = value;
+    size++;
+
+    return true;
+}
 
 // ------------------------------------------------------------
 // PART 3 — Full replay (find + shift + size)
