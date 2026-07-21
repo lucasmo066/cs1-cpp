@@ -94,7 +94,13 @@ bool removeAt(int arr[], int& size, int index) {
 //     Example: arr={10,20}, size=2, capacity=5, value=30
 //              → arr={10,20,30,?,?}, size=3
 //     Note: the shift loop should NOT run when inserting at index == size.
+bool appendValue(int arr[], int& size, int capacity, int value) {
+    if (size >= capacity) return false;
 
+    arr[size] = value;
+    size++;
+    return true;
+}
 
 // 2c. Write bool prependValue(int arr[], int& size, int capacity, int value)
 //     Insert value at index 0 (front of the array).
