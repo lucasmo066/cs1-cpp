@@ -161,7 +161,11 @@ return true;
 //     Hint: when you remove at index i and shift left, the NEXT
 //     element slides INTO index i — so do NOT always i++.
 //     Example: arr={5,5,10,5}, size=4, target=5 → arr={10,?}, size=1, return 3
+int removeAll(int arr[], int& size, int target) {
 
+
+    return 0;
+}
 
 // 4b. Write bool insertSorted(int arr[], int& size, int capacity, int value)
 //     Insert value so the array stays in non-decreasing order.
