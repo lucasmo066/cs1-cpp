@@ -145,8 +145,10 @@ bool removeFirst(int arr[], int& size, int target) {
 //     Defensive: size >= capacity OR index < 0 OR index > size → false.
 //     Example: arr={10,20,30}, size=3, capacity=5, index=1, value=99
 //              → arr={10,99,20,30,?}, size=4
+bool insertAt (int arr[], int& size, int capacity, int index, int value) {
 
-
+return true;
+}
 
 // ------------------------------------------------------------
 // PART 4 — Harder: multiple operations
