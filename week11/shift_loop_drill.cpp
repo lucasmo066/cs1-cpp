@@ -174,9 +174,14 @@ int removeAll(int arr[], int& size, int target) {
 
     int elementsRemoved = 0; 
 
-    for (int i = 0; ; i++) {
-      
-
+    for (int i = 0; i < size; {
+      if (arr[i] == target) {
+        shiftLeftFrom(arr, size, i);
+        size--;
+        elementsRemoved++;
+      } else {
+        i++;
+      }
     }
 
     return elementsRemoved;
