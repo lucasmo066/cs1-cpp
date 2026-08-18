@@ -25,7 +25,7 @@ Deeper practice: arrays with functions, recursion, references, and array mutatio
 | File | Topics |
 |------|--------|
 | `array_functions_practice.cpp` | Array helpers (`sumArray`, `maxValue`, `findMinMax`), light `assert` testing |
-| `recursion_worksheet.cpp` | Trace base cases in comments first, then recursive implementations |
+| `recursion_worksheet.cpp` | Code-first recursive helpers (factorial, arrays/strings, void print, fib) |
 | `recursion-mini/` | Menu-driven program applying recursion (`factorial`, `power`, etc.) |
 | `pass_by_reference.cpp` | `int&` out-parameters, updating `size` by reference |
 | `shift_loop_drill.cpp` | Shift-left / shift-right loops, `removeFirst`, `insertAt` |

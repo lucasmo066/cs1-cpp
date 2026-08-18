@@ -132,11 +132,14 @@ bool prependValue(int arr[], int& size, int capacity, int value) {
 bool removeFirst(int arr[], int& size, int target) {
     if (size <= 0) return false;
 
-    for (int i = 0;) {
-
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+            shiftLeftFrom(arr, size, i);
+            size--;
+            return true;      // found and removed — done
+        }
     }
-
-    return true;
+    return false;             // loop finished, target never found
 }
 
 // 3b. Write bool insertAt(int arr[], int& size, int capacity,
@@ -146,9 +149,14 @@ bool removeFirst(int arr[], int& size, int target) {
 //     Example: arr={10,20,30}, size=3, capacity=5, index=1, value=99
 //              → arr={10,99,20,30,?}, size=4
 bool insertAt (int arr[], int& size, int capacity, int index, int value) {
+    if (size >= capacity || index < 0 || index > size) return false;
 
-return true;
+    shiftRightFrom(arr, size, index);
+    arr[index] = value;
+    size++;
+    return true;
 }
+
 
 // ------------------------------------------------------------
 // PART 4 — Harder: multiple operations
@@ -162,9 +170,16 @@ return true;
 //     element slides INTO index i — so do NOT always i++.
 //     Example: arr={5,5,10,5}, size=4, target=5 → arr={10,?}, size=1, return 3
 int removeAll(int arr[], int& size, int target) {
+    if (size <= 0) return 0;
 
+    int elementsRemoved = 0; 
 
-    return 0;
+    for (int i = 0; ; i++) {
+      
+
+    }
+
+    return elementsRemoved;
 }
 
 // 4b. Write bool insertSorted(int arr[], int& size, int capacity, int value)
