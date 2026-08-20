@@ -34,7 +34,11 @@ using namespace std;
 //    Recursive: n * factorialRecursive(n - 1)
 //    Defensive: n < 0 → return -1
 //    (You already wrote an iterative factorial in week10/loop_practice.cpp.)
+    int factorialRecursive (int n) {
+        if (n < 0) return -1;
 
+        return n!
+    }
 
 
 // 2. powerRecursive(int base, int exp) → return base^exp
