@@ -37,7 +37,11 @@ using namespace std;
     int factorialRecursive (int n) {
         if (n < 0) return -1;
 
-        return n!
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+
+        return n * factorialRecursive(n - 1);
     }
 
 
@@ -46,7 +50,11 @@ using namespace std;
 //    Base: exp == 0 → return 1
 //    Recursive: base * powerRecursive(base, exp - 1)
 //    Defensive: exp < 0 → return -1
+int powerRecursive (int base, int exp) {
 
+
+    return base^exp;
+}
 
 
 // ------------------------------------------------------------
