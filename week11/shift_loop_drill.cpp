@@ -174,7 +174,7 @@ int removeAll(int arr[], int& size, int target) {
 
     int elementsRemoved = 0; 
 
-    for (int i = 0; i < size; {
+    for (int i = 0; i < size; ) {
       if (arr[i] == target) {
         shiftLeftFrom(arr, size, i);
         size--;
@@ -196,7 +196,22 @@ int removeAll(int arr[], int& size, int target) {
 //              → arr={10,20,25,40,?,?}, size=4
 //     Example: arr={10,20,30}, size=3, capacity=6, value=5
 //              → arr={5,10,20,30,?,?}, size=4
+bool insertSorted(int arr[], int& size, int capacity, int value) {
+    if (size >= capacity) return false;
 
+   for(int i = 0; i < size; i++) {
+        if (arr[i] > value) {
+            shiftRightFrom(arr, size, i);
+            arr[i] = value;
+            size++;
+
+            return true;
+         }
+   }
+
+   appendValue(arr, size,capacity, value);
+   return true;
+}
 
 // ------------------------------------------------------------
 // PART 5 — Optional helper (makes manual testing easier)
@@ -206,7 +221,21 @@ int removeAll(int arr[], int& size, int target) {
 //    Print:  label: [e1, e2, e3]
 //    If size <= 0, print label: []
 //    Use in main() to eyeball your shifts before you trust asserts.
+void printArray(const int arr[], int size, const string& label) {
+    if (size <= 0) {
+        cout << label << ": []" << endl;
+        return;
+    }
 
+    cout << label << ": [";
+    for (int i = 0; i < size; i++) {
+        cout << arr[i];
+        if (i < size - 1) {
+            cout << ", ";
+        }
+    }
+    cout << "]" << endl;
+}
 
 // ------------------------------------------------------------
 // PART 6 — Testing
@@ -219,7 +248,7 @@ void runTests() {
     shiftLeftFrom(a, 4, 1);
     assert(a[0] == 10 && a[1] == 30 && a[2] == 40 && a[3] == 40);
 
-    int b[] = {10, 20, 30};
+    int b[4] = {10, 20, 30};
     shiftRightFrom(b, 3, 1);
     assert(b[0] == 10 && b[1] == 20 && b[2] == 20 && b[3] == 30);
 
@@ -251,25 +280,25 @@ void runTests() {
     assert(sz == 4 && g[0] == 10 && g[1] == 99 && g[2] == 20 && g[3] == 30);
 
     // --- Part 4 ---
-    // int h[] = {5, 5, 10, 5};
-    // sz = 4;
-    // assert(removeAll(h, sz, 5) == 3);
-    // assert(sz == 1 && h[0] == 10);
+     int h[] = {5, 5, 10, 5};
+     sz = 4;
+     assert(removeAll(h, sz, 5) == 3);
+     assert(sz == 1 && h[0] == 10);
 
-    // int i[6] = {10, 20, 40};
-    // sz = 3;
-    // assert(insertSorted(i, sz, 6, 25) == true);
-    // assert(sz == 4 && i[0] == 10 && i[1] == 20 && i[2] == 25 && i[3] == 40);
+     int i[6] = {10, 20, 40};
+     sz = 3;
+     assert(insertSorted(i, sz, 6, 25) == true);
+     assert(sz == 4 && i[0] == 10 && i[1] == 20 && i[2] == 25 && i[3] == 40);
 }
 
 int main() {
     // Start with Part 1. Use printArray in main() for quick visual checks:
     //
-    //   int arr[] = {10, 20, 30};
-    //   int sz = 3;
-    //   printArray(arr, sz, "before");
-    //   removeAt(arr, sz, 1);
-    //   printArray(arr, sz, "after");
+       int arr[] = {10, 20, 30};
+       int sz = 3;
+       printArray(arr, sz, "before");
+       removeAt(arr, sz, 1);
+       printArray(arr, sz, "after");
 
     runTests();
     cout << "All tests passed." << endl;
