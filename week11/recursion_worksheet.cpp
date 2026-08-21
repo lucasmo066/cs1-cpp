@@ -51,7 +51,7 @@ using namespace std;
 //    Recursive: base * powerRecursive(base, exp - 1)
 //    Defensive: exp < 0 → return -1
 int powerRecursive (int base, int exp) {
-
+    if (exp < 0) return -1;
 
     return base^exp;
 }
