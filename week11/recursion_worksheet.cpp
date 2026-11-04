@@ -53,7 +53,10 @@ using namespace std;
 int powerRecursive (int base, int exp) {
     if (exp < 0) return -1;
 
-    return base^exp;
+    if (exp == 0) {
+        return 1;
+    }
+    return base * powerRecursive(base, exp - 1);
 }
 
 
@@ -68,7 +71,13 @@ int powerRecursive (int base, int exp) {
 //    Example: {1,2,3}, size=3, index=0 → 6
 //    Base: index >= size → return 0
 //    Recursive: arr[index] + sumArrayRecursive(arr, size, index + 1)
+int sumArrayRecursive (int arr[], int size, int index) {
+    if (index >= size) {
+        return 0;
+    }
 
+    return arr[index] + sumArrayRecursive(arr, size, index + 1);
+}
 
 
 // 4. countCharRecursive(string s, char target, int index)
@@ -136,11 +145,11 @@ int powerRecursive (int base, int exp) {
 int main() {
 
     // Part 1
-    // cout << factorialRecursive(5) << endl;   // 120
-    // cout << factorialRecursive(0) << endl;   // 1
-    // cout << factorialRecursive(-1) << endl;  // -1 (defensive)
-    // cout << powerRecursive(2, 10) << endl;   // 1024
-    // cout << powerRecursive(2, -1) << endl;   // -1 (defensive)
+     cout << factorialRecursive(5) << endl;   // 120
+     cout << factorialRecursive(0) << endl;   // 1
+     cout << factorialRecursive(-1) << endl;  // -1 (defensive)
+     cout << powerRecursive(2, 10) << endl;   // 1024
+     cout << powerRecursive(2, -1) << endl;   // -1 (defensive)
 
     // Part 2
     // int nums[] = {1, 2, 3, 4};
