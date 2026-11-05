@@ -85,9 +85,13 @@ int sumArrayRecursive (int arr[], int size, int index) {
 //    Example: countCharRecursive("hello", 'l', 0) → 2
 //    Base: index >= s.length() → return 0
 //    Recursive: (s[index] == target ? 1 : 0) + countCharRecursive(s, target, index + 1)
+int countCharRecursive (string s, char target, int index) {
+    if (index >= s.length()) {
+        return 0;
+    }
 
-
-
+    return (s[index] == target ? 1 : 0) + countCharRecursive(s, target, index + 1);
+}
 // ------------------------------------------------------------
 // PART 3 — Void recursion (effect before vs after the call)
 // ------------------------------------------------------------
@@ -152,9 +156,9 @@ int main() {
      cout << powerRecursive(2, -1) << endl;   // -1 (defensive)
 
     // Part 2
-    // int nums[] = {1, 2, 3, 4};
-    // cout << sumArrayRecursive(nums, 4, 0) << endl;            // 10
-    // cout << countCharRecursive("recursion", 'r', 0) << endl;  // 2
+     int nums[] = {1, 2, 3, 4};
+     cout << sumArrayRecursive(nums, 4, 0) << endl;            // 10
+     cout << countCharRecursive("recursion", 'r', 0) << endl;  // 2
 
     // Part 3
     // printRangeRecursive(1, 10);
