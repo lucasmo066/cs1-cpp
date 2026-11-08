@@ -32,7 +32,18 @@ using namespace std;
 //       void printValue(string s)  → prints "string: hello"
 //     Call: printValue(42), printValue(3.14), printValue("hello")
 //     Compiler picks the right one based on argument type.
+void printValue (int n) {
+    cout << "int: " << n << endl;
 
+}
+
+void printValue (double n) {
+    cout << "double: " << n << endl;
+}
+
+void printValue (string s) {
+    cout << "string: " << s << endl;
+}
 
 // 1b. Write two overloads of calcArea:
 //       double calcArea(double side)              → square area (side * side)
@@ -163,9 +174,9 @@ int main() {
     // Manual tests — call your functions and check output visually first
     // then move to assert-based runTests() above
 
-    // printValue(42);
-    // printValue(3.14);
-    // printValue("hello");
+     printValue(42);
+     printValue(3.14);
+     printValue("hello");
 
     // printPlayer("Lucas");
     // printPlayer("Lucas", "Rockies");
