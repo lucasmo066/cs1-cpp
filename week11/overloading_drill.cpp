@@ -51,7 +51,15 @@ void printValue (string s) {
 //     Example: calcArea(5.0) → 25.0
 //              calcArea(4.0, 6.0) → 24.0
 //     Note: same concept (area), different inputs.
+double calcArea (double side) {
+    double area = side * side;
+    return area;
+}
 
+double calcArea (double width, double height) {
+    double area = width * height;
+    return area;
+}
 
 // 1c. Write two overloads of describe:
 //       void describe(int score)   → "Score: 95"
