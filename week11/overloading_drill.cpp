@@ -68,7 +68,17 @@ double calcArea (double width, double height) {
 //     Notice: the compiler cannot tell int from double apart
 //     when you call describe(95) vs describe(3.85) unless you're explicit.
 //     Test both: describe(95) and describe(3.85) and describe("Lucas", 22)
+void describe (int score) {
+    cout << "Score: " << score << endl;
+}
 
+void describe (double gpa) {
+    cout << "GPA: " << gpa << endl;
+}
+
+void describe (string name, int age) {
+    cout << "Name: " << name << ", Age: " << age << endl;
+}
 
 // ------------------------------------------------------------
 // PART 2 — Overload by parameter count
@@ -89,7 +99,17 @@ double calcArea (double width, double height) {
 //     Each overload adds one more piece of information.
 //     Note: could you solve this with default parameters instead?
 //     Think about it — write your answer as a comment after the functions.
+void printPlayer (string name) {
+    cout << "PLayer: " << name << endl;
+}
 
+void printPlayer (string name, string team) {
+    cout << "Player: " << name << " | " << "Team: " << team << endl;
+}
+
+void printPlayer (string name, string team, double avg) {
+    "Player: " << name << " | " << "Team: " << team << " | " << avg << endl;  
+}
 
 // 2b. Write two overloads of createGreeting:
 //       string createGreeting(string name)
@@ -99,7 +119,19 @@ double calcArea (double width, double height) {
 //              if language == "es": "Hola, Lucas!"
 //              else: "Hello, Lucas!"
 //     Note: different parameter COUNT AND behavior — good overload candidate.
+string createGreeting (string name) {
+    return cout << "Hello, " << name << "!" endl;
+}
 
+string createGreeting (string name, string language) {
+    if (language == "pt") {
+        cout << "pt: Olà, " << name << endl;
+    } else if (language == "es") {
+        cout <<  "es: Hola, " << name << endl;
+    } else {
+        cout << "Hello, " << name << endl;
+    }
+}
 
 // ------------------------------------------------------------
 // PART 3 — When NOT to overload (think-about, no code)
@@ -186,9 +218,9 @@ int main() {
      printValue(3.14);
      printValue("hello");
 
-    // printPlayer("Lucas");
-    // printPlayer("Lucas", "Rockies");
-    // printPlayer("Lucas", "Rockies", 0.285);
+     printPlayer("Lucas");
+     printPlayer("Lucas", "Rockies");
+     printPlayer("Lucas", "Rockies", 0.285);
 
     // printDate(30, 7, 2012);        // uses default style=0
     // printDate(30, 7, 2012, 1);     // European style
